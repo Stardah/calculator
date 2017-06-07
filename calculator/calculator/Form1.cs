@@ -35,6 +35,34 @@ namespace calculator
         }
 
         /// <summary>
+        /// Добавляет столбец к матрице
+        /// </summary>
+        public void AddColumn()
+        {
+            int left = 0;
+            int top = 0;
+            for (int i=0; i< labels.Count; i++)
+            {
+                labels[i].Last().Text = "X" + labels[i].Count.ToString() + "+"; // Fix last label's Text
+                left = boxes[i].Last().Left + gapLeft;
+                top = labels[i].Last().Top;
+                labels[i].Add(AddLabel(left, top, "X" + (labels[i].Count+1).ToString() + "=")); // Add label
+                DrawOneControl(labels[i].Last());
+                top = boxes[i].Last().Top+3;
+                boxes[i].Add(AddBox(left + labels[i].Last().Size.Width, top));//labels[i].Last().Text.ToString().Length * (int)labelFont.SizeInPoints, top));
+                DrawOneControl(boxes[i].Last());
+            }
+        }
+
+        /// <summary>
+        /// Добавялет строку к матрице
+        /// </summary>
+        public void AddRow()
+        {
+
+        }
+
+        /// <summary>
         /// Отрисовывает все контролы
         /// </summary>
         public void DrawControls()
@@ -121,6 +149,17 @@ namespace calculator
             label.Text = info;
             //label.AutoSize = true;
             return label;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddColumn();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(boxes[0][1].Text,"");
         }
     }
 }
