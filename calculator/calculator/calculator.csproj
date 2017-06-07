@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BD.cs" />
     <Compile Include="Calculator.cs" />
+    <Compile Include="CloneClass.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
