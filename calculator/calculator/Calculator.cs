@@ -131,6 +131,7 @@ namespace calculator
                 for (int i = 1; i < EquationNumber; ++i)
                     matrixVar[i - 1, eq] = (v.Count > i) ? v[i] : 0;
             }
+            return new double[]{0};
         }
 
         private const int EquationNumber = 3;
