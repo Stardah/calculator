@@ -82,6 +82,8 @@ namespace calculator
             textBox.Top = top - 3;
             textBox.Left = left;
             textBox.Text = "0";
+            textBox.KeyDown += KeyHandler;
+            textBox.PreviewKeyDown += new PreviewKeyDownEventHandler(BoxPreviewKeyDown);
             return textBox;
         }
 
@@ -102,6 +104,33 @@ namespace calculator
             label.Text = info;
             //label.AutoSize = true;
             return label;
+        }
+
+        public void KeyHandler(object sender, KeyEventArgs e)
+        {
+           // if (e.KeyChar == (char)Keys.Down)
+             //   ;
+            //MessageBox.Show("", "");
+        }
+
+        /// <summary>
+        /// Делает стрелки вверх/вниз юзабельными (превьюшка нажатий)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BoxPreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                    e.IsInputKey = true;
+                    break;
+                case Keys.Up:
+                    e.IsInputKey = true;
+                    break;
+                default: 
+                    break;
+            }
         }
     }
 }

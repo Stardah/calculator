@@ -24,14 +24,10 @@ namespace calculator
 
         public Form1()
         {
+            this.KeyPreview = true;
             InitializeComponent();
             StartUp();
             DrawControls();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         /// <summary>
@@ -106,13 +102,13 @@ namespace calculator
             List<TextBox> rowBox;
             List<Label> rowLabel;
             int left;
-            int top=10;
+            int top=20;
             Label label;
             for (int j = 0; j < 3; j++)
             {
                 rowBox = new List<TextBox>();
                 rowLabel = new List<Label>();
-                left = 10;
+                left = 50;
                 for (int i = 0; i < 3; i++)
                 {
                     rowBox.Add(stuff.AddBox(left, j * gapTop + top));
@@ -128,9 +124,15 @@ namespace calculator
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnAddRow_Click(object sender, EventArgs e)
         {
             AddRow();
+            if (boxes.Last().Last().Top>= btnAddRaw.Top) btnAddRaw.Top += gapTop;
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }
