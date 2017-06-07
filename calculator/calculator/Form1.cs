@@ -127,12 +127,11 @@ namespace calculator
         private void btnAddRow_Click(object sender, EventArgs e)
         {
             AddRow();
-            if (boxes.Last().Last().Top>= btnAddRaw.Top) btnAddRaw.Top += gapTop;
-        }
-
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
+            if (boxes.Last().Last().Top >= btnAddRaw.Top)
+            {
+                btnAddRaw.Top += gapTop;
+                btnSolve.Top += gapTop;
+            }
         }
     }
 }

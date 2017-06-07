@@ -10,8 +10,8 @@ namespace calculator
 {
     class AddAndClone
     {
-        public Font textFont = new Font("Verdana", 10.0F, FontStyle.Regular);
-        public Font labelFont = new Font("Verdana", 10.0F, FontStyle.Bold);
+        public Font textFont = new Font("Verdana", 10.0F, FontStyle.Italic);
+        public Font labelFont = new Font("Verdana", 9.75F, FontStyle.Italic);
 
         public List<TextBox> boxes = new List<TextBox>();
         public List<Label> labels;
@@ -106,9 +106,17 @@ namespace calculator
             return label;
         }
 
+        /// <summary>
+        /// TextBox.KeyDown Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void KeyHandler(object sender, KeyEventArgs e)
         {
-           // if (e.KeyChar == (char)Keys.Down)
+           if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
+            {
+                
+            }
              //   ;
             //MessageBox.Show("", "");
         }
