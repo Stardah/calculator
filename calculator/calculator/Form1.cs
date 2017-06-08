@@ -19,7 +19,6 @@ namespace calculator
     {
         ControlsManager stuff = new ControlsManager();
         Point dragOffset;
-        public static string ThisName;
 
         //Dictionary<string, Font> fonts = new Dictionary<string, Font>();
         PrivateFontCollection fonts = new PrivateFontCollection();
@@ -35,14 +34,10 @@ namespace calculator
             int nHeightEllipse // width of ellipse
         );
 
-        public string GetName => this.Name;
-
-
         public Form1()
         {
             this.KeyPreview = true;
             InitializeComponent();
-            ThisName = this.Name;
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Rounded Corners
 
             InitFont();

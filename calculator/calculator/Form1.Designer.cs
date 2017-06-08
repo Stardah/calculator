@@ -39,7 +39,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +54,7 @@
             this.btnAddRaw.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddRaw.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAddRaw.ForeColor = System.Drawing.Color.White;
-            this.btnAddRaw.Location = new System.Drawing.Point(74, 196);
+            this.btnAddRaw.Location = new System.Drawing.Point(84, 199);
             this.btnAddRaw.Name = "btnAddRaw";
             this.btnAddRaw.Size = new System.Drawing.Size(32, 32);
             this.btnAddRaw.TabIndex = 1;
@@ -74,7 +73,7 @@
             this.btnSolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSolve.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSolve.ForeColor = System.Drawing.Color.White;
-            this.btnSolve.Location = new System.Drawing.Point(112, 196);
+            this.btnSolve.Location = new System.Drawing.Point(122, 199);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(150, 32);
             this.btnSolve.TabIndex = 2;
@@ -98,7 +97,7 @@
             this.panel1.Controls.Add(this.labelHeader);
             this.panel1.Location = new System.Drawing.Point(325, 26);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(304, 403);
+            this.panel1.Size = new System.Drawing.Size(304, 376);
             this.panel1.TabIndex = 3;
             // 
             // label4
@@ -190,27 +189,12 @@
             this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnDel.ForeColor = System.Drawing.Color.White;
-            this.btnDel.Location = new System.Drawing.Point(36, 196);
+            this.btnDel.Location = new System.Drawing.Point(46, 199);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(32, 32);
             this.btnDel.TabIndex = 6;
             this.btnDel.UseVisualStyleBackColor = false;
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.richTextBox1.DetectUrls = false;
-            this.richTextBox1.Location = new System.Drawing.Point(73, 282);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBox1.ShortcutsEnabled = false;
-            this.richTextBox1.Size = new System.Drawing.Size(53, 49);
-            this.richTextBox1.TabIndex = 7;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.WordWrap = false;
             // 
             // Form1
             // 
@@ -219,8 +203,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::calculator.Properties.Resources.LightTriangles;
-            this.ClientSize = new System.Drawing.Size(629, 429);
-            this.Controls.Add(this.richTextBox1);
+            this.ClientSize = new System.Drawing.Size(629, 402);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -249,7 +232,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnDel;
-        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

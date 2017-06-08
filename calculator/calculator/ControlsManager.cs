@@ -11,13 +11,11 @@ namespace calculator
 {
     class ControlsManager
     {
-        // Some... usefull things
-        
         // Fonts
-        Font textFont = new Font("Verdana", 10.0F, FontStyle.Italic);
-        Font labelFont = new Font("Italic", 9.75F, FontStyle.Italic);
+        Font textFont = new Font("Verdana", 10.0F, FontStyle.Regular);
+        Font labelFont = new Font("Italic", 9.75F, FontStyle.Regular);
         // Sizes of Controls
-        Size labelSize = new Size(26, 16); 
+        Size labelSize = new Size(28, 19); 
         Size boxSize = new Size(38, 23);
         // Gapses between Controls
         public int gapLeft = 38;
@@ -71,7 +69,7 @@ namespace calculator
         /// </summary>
         public bool AddRow()
         {
-            if (boxes.Count < 10)
+            if (boxes.Count < 8)
             {
                 // Fill the class with clone
                 List<TextBox> boxRow = boxes.Last();
@@ -145,9 +143,16 @@ namespace calculator
                 for (int i = 0; i < 3; i++)
                 {
                     rowBox.Add(AddBox(left, j * gapTop + top));
+                    label = AddLabel(left + gapLeft, j * gapTop + top, "X");
+                    // Оффсет дли индекса
+                    label.SelectionCharOffset = -5;
+                    // Собственно индекс	
+                    label.SelectedText = (i + 1).ToString();
+                    // +/=
+                    label.SelectionCharOffset = 0;
                     if (i == 3 - 1)
-                        label = AddLabel(left + gapLeft, j * gapTop + top, "X" + (i + 1).ToString() + "=");
-                    else label = AddLabel(left + gapLeft, j * gapTop + top, "X" + (i + 1).ToString() + "+");
+                        label.SelectedText = "=";
+                    else label.SelectedText = "+";
                     rowLabel.Add(label);
                     left += gapLeft + labelSize.Width;
                 }
@@ -223,14 +228,19 @@ namespace calculator
             richTextBox.ScrollBars = RichTextBoxScrollBars.None;
             richTextBox.ReadOnly = true;
             richTextBox.ShortcutsEnabled = false;
-            richTextBox.GotFocus += RTBFocus;
+            richTextBox.GotFocus += RTBFocus; // Handler
             richTextBox.Size = labelSize;
             richTextBox.Top = top;
             richTextBox.Left = left;
-            richTextBox.Text = info;
+            richTextBox.SelectedText = info;
             return richTextBox;
         }
 
+        /// <summary>
+        /// Снимает фокус с RTB и передаёт TextBox'у слева
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void RTBFocus(Object sender, EventArgs e)
         {
             RichTextBox rtb = sender as RichTextBox;
