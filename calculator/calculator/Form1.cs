@@ -72,6 +72,15 @@ namespace calculator
             btnWolf.MouseLeave += btnMouseLeave;
             btnWolf.MouseDown += btnMouseDown;
             btnWolf.MouseUp += btnMouseUp;
+            panel1.MouseMove += panelMouseMove;
+            panel1.MouseDown += panelMouseDown;
+            panel2.MouseMove += panelMouseMove;
+            panel2.MouseDown += panelMouseDown;
+            panel3.MouseMove += panelMouseMove;
+            panel3.MouseDown += panelMouseDown;
+            panelSystem.MouseMove += panelMouseMove;
+            panelSystem.MouseDown += panelMouseDown;
+
         }
 
         /// <summary>

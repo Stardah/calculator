@@ -96,7 +96,7 @@ namespace calculator
 
         public bool DelRow()
         {
-            if (boxes.Count > 3)
+            if (boxes.Count > 2)
             {
                 foreach (TextBox box in boxes.Last())
                     box.Dispose();

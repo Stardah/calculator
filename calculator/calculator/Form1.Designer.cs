@@ -48,6 +48,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panelSystem = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -86,7 +87,7 @@
             this.btnSolve.ForeColor = System.Drawing.Color.White;
             this.btnSolve.Location = new System.Drawing.Point(119, 224);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(150, 32);
+            this.btnSolve.Size = new System.Drawing.Size(149, 32);
             this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "Решить";
             this.btnSolve.UseVisualStyleBackColor = false;
@@ -167,8 +168,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(586, 27);
             this.panel2.TabIndex = 5;
-            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelMouseDown);
-            this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelMouseMove);
             // 
             // btnClose
             // 
@@ -177,7 +176,7 @@
             this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Location = new System.Drawing.Point(560, 0);
             this.btnClose.Margin = new System.Windows.Forms.Padding(0);
@@ -302,6 +301,7 @@
             this.label7.Font = new System.Drawing.Font("Bell MT", 14.25F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Image = global::calculator.Properties.Resources.LabelBack;
+            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(321, 45);
@@ -312,6 +312,7 @@
             // panelSystem
             // 
             this.panelSystem.BackColor = System.Drawing.Color.Transparent;
+            this.panelSystem.Controls.Add(this.btnClear);
             this.panelSystem.Controls.Add(this.label7);
             this.panelSystem.Controls.Add(this.btnDel);
             this.panelSystem.Controls.Add(this.btnAddRaw);
@@ -321,6 +322,22 @@
             this.panelSystem.Name = "panelSystem";
             this.panelSystem.Size = new System.Drawing.Size(321, 268);
             this.panelSystem.TabIndex = 11;
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnClear.BackgroundImage = global::calculator.Properties.Resources.GrayTriangles;
+            this.btnClear.FlatAppearance.BorderSize = 0;
+            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SkyBlue;
+            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnClear.ForeColor = System.Drawing.Color.RosyBrown;
+            this.btnClear.Location = new System.Drawing.Point(5, 224);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(32, 32);
+            this.btnClear.TabIndex = 11;
+            this.btnClear.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -367,6 +384,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panelSystem;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 
