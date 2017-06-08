@@ -33,34 +33,40 @@ namespace calculator
             int nWidthEllipse, // height of ellipse
             int nHeightEllipse // width of ellipse
         );
-
+        /*
+         * With WS_EX_COMPOSITED set, all descendants of a window get 
+         * bottom-to-top painting order using double-buffering. 
+         * Bottom-to-top painting order allows a descendent window 
+         * to have translucency (alpha) and transparency (color-key) 
+         * effects, but only if the descendent window also has 
+         * the WS_EX_TRANSPARENT bit set. Double-buffering allows the 
+         * window and its descendents to be painted without flicker.
+         */
         public Form1()
         {
             this.KeyPreview = true;
-            InitializeComponent();
-            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Rounded Corners
-
-            InitFont();
-
             DrawControls(stuff.boxes);
             DrawControls(stuff.labels);
+            InitializeComponent();
+            // Раздаём двойную буфферизацию всем потомкам
+            int style = NativeWinAPI.GetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE);
+            style |= NativeWinAPI.WS_EX_COMPOSITED;
+            NativeWinAPI.SetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE, style);
+            //
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Rounded Corners
+            InitFont();
         }
 
         /// <summary>
         /// Apply fonts
         /// </summary>
         public void InitFont()
-        {
-            // Записываем ttf из ресурсов в файл
+        {  
             string fileName = Path.GetTempFileName();
-            File.WriteAllBytes(fileName, Resources.Exo2);
-            // Загружаем в коллекцию шрифтов
-            fonts.AddFontFile(fileName);
-
+            File.WriteAllBytes(fileName, Resources.Exo2);   // Записываем ttf из ресурсов в файл
+            fonts.AddFontFile(fileName);                    // Загружаем в коллекцию шрифтов
             labelHeader.Font = new Font(fonts.Families[0], 16f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            //btnAddRaw.Font = new Font(fonts.Families[0], 14f, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSolve.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            //stuff = new ControlsManager(new Font(fonts.Families[0], 10f, FontStyle.Regular, GraphicsUnit.Point, 0));
         }
 
         /// <summary>
@@ -183,10 +189,8 @@ namespace calculator
             if (e.Button == MouseButtons.Left)
             {
                 Point newLocation = this.PointToScreen(e.Location);
-
                 newLocation.X -= dragOffset.X;
                 newLocation.Y -= dragOffset.Y;
-
                 FindForm().Location = newLocation;
             }
         }
