@@ -55,10 +55,13 @@ namespace calculator
             for (int i = 0; i < list.Count; i++)
                 for (int j = 0; j < list.Last().Count; j++)
                 {
+                    if (list[i][j].Text == "")
+                        list[i][j].Text = "0";
                     if (list[i][j].Text.ToString().First() == '.') // Если первый символ - точка (.123)
                         list[i][j].Text = "0"+ list[i][j].Text; 
                     if (list[i][j].Text.ToString().Last() == '.') // Если последний символ точка (123.)
                         list[i][j].Text += "0";
+                    if (list[i][j].Text.ToString().Length > 8) list[i][j].Text = list[i][j].Text.ToString().Remove(8);
                     array[i, j] = double.Parse(list[i][j].Text.Replace(".", ",")); // Double кушает только запятые
                 }
             return array;
@@ -69,7 +72,7 @@ namespace calculator
         /// </summary>
         public bool AddRow()
         {
-            if (boxes.Count < 8)
+            if (boxes.Count < 5)
             {
                 // Fill the class with clone
                 List<TextBox> boxRow = boxes.Last();
@@ -259,9 +262,13 @@ namespace calculator
             TextBox box = sender as TextBox;
             if (e.KeyChar == ',') e.KeyChar = '.';
             if (e.KeyChar != (char)Keys.Back)
-            // Если введена не цифра, не точка, либо вторая точка
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' || e.KeyChar == '.' && box.Text.Contains("."))
-                e.Handled = true;
+            {
+                // Если введена не цифра, не точка, либо вторая точка
+                if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' || e.KeyChar == '.' && box.Text.Contains("."))
+                    e.Handled = true;
+                // Воод не более 8 символов
+                if (box.Text.ToString().Length > 8) e.Handled = true;
+            }
         }
 
         /// <summary>

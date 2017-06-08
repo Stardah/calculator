@@ -39,8 +39,16 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
+            this.textWoldQuery = new System.Windows.Forms.TextBox();
+            this.btnWolf = new System.Windows.Forms.Button();
+            this.textWolfResult = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAddRaw
@@ -80,24 +88,22 @@
             this.btnSolve.Text = "Решить";
             this.btnSolve.UseVisualStyleBackColor = false;
             this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
-            this.btnSolve.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSolve_MouseDown);
-            this.btnSolve.MouseEnter += new System.EventHandler(this.btnSolve_MouseEnter);
-            this.btnSolve.MouseLeave += new System.EventHandler(this.btnSolve_MouseLeave);
-            this.btnSolve.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnSolve_MouseUp);
+            this.btnSolve.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnMouseDown);
+            this.btnSolve.MouseEnter += new System.EventHandler(this.btnMouseEnter);
+            this.btnSolve.MouseLeave += new System.EventHandler(this.btnMouseLeave);
+            this.btnSolve.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnMouseUp);
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.labelHeader);
-            this.panel1.Location = new System.Drawing.Point(325, 26);
+            this.panel1.Location = new System.Drawing.Point(319, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(304, 376);
+            this.panel1.Size = new System.Drawing.Size(267, 371);
             this.panel1.TabIndex = 3;
             // 
             // label4
@@ -143,7 +149,7 @@
             this.labelHeader.Image = global::calculator.Properties.Resources.LabelBack;
             this.labelHeader.Location = new System.Drawing.Point(0, 0);
             this.labelHeader.Name = "labelHeader";
-            this.labelHeader.Size = new System.Drawing.Size(304, 45);
+            this.labelHeader.Size = new System.Drawing.Size(267, 45);
             this.labelHeader.TabIndex = 0;
             this.labelHeader.Text = "Решение";
             this.labelHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -155,7 +161,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(629, 26);
+            this.panel2.Size = new System.Drawing.Size(586, 27);
             this.panel2.TabIndex = 5;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
@@ -165,12 +171,11 @@
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
             this.btnClose.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClose.BackgroundImage")));
             this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(603, 0);
+            this.btnClose.Location = new System.Drawing.Point(560, 0);
             this.btnClose.Margin = new System.Windows.Forms.Padding(0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(26, 26);
@@ -196,14 +201,103 @@
             this.btnDel.UseVisualStyleBackColor = false;
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
+            // textWoldQuery
+            // 
+            this.textWoldQuery.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textWoldQuery.Location = new System.Drawing.Point(68, 40);
+            this.textWoldQuery.Name = "textWoldQuery";
+            this.textWoldQuery.Size = new System.Drawing.Size(201, 23);
+            this.textWoldQuery.TabIndex = 7;
+            // 
+            // btnWolf
+            // 
+            this.btnWolf.BackColor = System.Drawing.Color.Transparent;
+            this.btnWolf.BackgroundImage = global::calculator.Properties.Resources.RoundedButton2;
+            this.btnWolf.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnWolf.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnWolf.FlatAppearance.BorderSize = 0;
+            this.btnWolf.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnWolf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnWolf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWolf.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnWolf.ForeColor = System.Drawing.Color.White;
+            this.btnWolf.Location = new System.Drawing.Point(210, 82);
+            this.btnWolf.Name = "btnWolf";
+            this.btnWolf.Size = new System.Drawing.Size(150, 24);
+            this.btnWolf.TabIndex = 7;
+            this.btnWolf.Text = "ВЫЧИСЛИТЬ";
+            this.btnWolf.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnWolf.UseVisualStyleBackColor = false;
+            this.btnWolf.Click += new System.EventHandler(this.btnWolf_Click);
+            // 
+            // textWolfResult
+            // 
+            this.textWolfResult.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textWolfResult.Location = new System.Drawing.Point(307, 40);
+            this.textWolfResult.Name = "textWolfResult";
+            this.textWolfResult.Size = new System.Drawing.Size(201, 23);
+            this.textWolfResult.TabIndex = 8;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel3.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.btnWolf);
+            this.panel3.Controls.Add(this.textWolfResult);
+            this.panel3.Controls.Add(this.textWoldQuery);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 284);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(586, 118);
+            this.panel3.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(67, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 16);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "ВЫРАЖЕНИЕ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(435, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(79, 16);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "РЕШЕНИЕ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(275, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(26, 23);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "=";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::calculator.Properties.Resources.LightTriangles;
-            this.ClientSize = new System.Drawing.Size(629, 402);
+            this.ClientSize = new System.Drawing.Size(586, 402);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -216,6 +310,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -231,6 +327,13 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnDel;
+        private System.Windows.Forms.TextBox textWoldQuery;
+        private System.Windows.Forms.Button btnWolf;
+        private System.Windows.Forms.TextBox textWolfResult;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -1,16 +1,11 @@
 ﻿using calculator.Properties;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace calculator
@@ -18,6 +13,7 @@ namespace calculator
     public partial class Form1 : Form
     {
         ControlsManager stuff = new ControlsManager();
+        Wolfram wolf = new Wolfram();
         Point dragOffset;
 
         //Dictionary<string, Font> fonts = new Dictionary<string, Font>();
@@ -55,6 +51,7 @@ namespace calculator
             //
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Rounded Corners
             InitFont();
+            InitControls();
         }
 
         /// <summary>
@@ -67,6 +64,14 @@ namespace calculator
             fonts.AddFontFile(fileName);                    // Загружаем в коллекцию шрифтов
             labelHeader.Font = new Font(fonts.Families[0], 16f, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSolve.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+        }
+
+        public void InitControls()
+        {
+            btnWolf.MouseEnter += btnMouseEnter;
+            btnWolf.MouseLeave += btnMouseLeave;
+            btnWolf.MouseDown += btnMouseDown;
+            btnWolf.MouseUp += btnMouseUp;
         }
 
         /// <summary>
@@ -196,24 +201,33 @@ namespace calculator
         }
 
         // Эффекты от наведения и нажатий
-        private void btnSolve_MouseEnter(object sender, EventArgs e)
+        private void btnMouseEnter(object sender, EventArgs e)
         {
-            btnSolve.BackgroundImage = Resources.RoundedButtonLight;
+            Button btn = sender as Button;
+            btn.BackgroundImage = Resources.RoundedButtonLight;
         }
 
-        private void btnSolve_MouseLeave(object sender, EventArgs e)
+        private void btnMouseLeave(object sender, EventArgs e)
         {
-            btnSolve.BackgroundImage = Resources.RoundedButton2;
+            Button btn = sender as Button;
+            btn.BackgroundImage = Resources.RoundedButton2;
         }
 
-        private void btnSolve_MouseDown(object sender, MouseEventArgs e)
+        private void btnMouseDown(object sender, MouseEventArgs e)
         {
-            btnSolve.BackgroundImage = Resources.RoundedButtonDown;
+            Button btn = sender as Button;
+            btn.BackgroundImage = Resources.RoundedButtonDown;
         }
 
-        private void btnSolve_MouseUp(object sender, MouseEventArgs e)
+        private void btnMouseUp(object sender, MouseEventArgs e)
         {
-            btnSolve.BackgroundImage = Resources.RoundedButton2;
+            Button btn = sender as Button;
+            btn.BackgroundImage = Resources.RoundedButton2;
+        }
+
+        private void btnWolf_Click(object sender, EventArgs e)
+        {
+            textWolfResult.Text = wolf.SolveThis(textWoldQuery.Text);
         }
     }
 }
