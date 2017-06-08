@@ -71,5 +71,10 @@ namespace calculator
                 btnSolve.Top += stuff.gapTop;
             }
         }
+
+        private void btnSolve_Click(object sender, EventArgs e)
+        {
+            stuff.GetArray();
+        }
     }
 }

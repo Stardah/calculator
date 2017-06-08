@@ -54,7 +54,11 @@ namespace calculator
             for (int i = 0; i < list.Count; i++)
                 for (int j = 0; j < list.Last().Count; j++)
                 {
-                    array[i, j] = double.Parse(list[i][j].ToString());
+                    if (list[i][j].Text.ToString().First() == '.') // Если первый символ - точка (.123)
+                        list[i][j].Text = "0"+ list[i][j].Text; 
+                    if (list[i][j].Text.ToString().Last() == '.') // Если последний символ точка (123.)
+                        list[i][j].Text += "0";
+                    array[i, j] = double.Parse(list[i][j].Text.Replace(".", ",")); // Double кушает только запятые
                 }
             return array;
         }
@@ -207,6 +211,8 @@ namespace calculator
         public void KeyHandler(object sender, KeyPressEventArgs e)
         {
             TextBox box = sender as TextBox;
+            if (e.KeyChar == ',') e.KeyChar = '.';
+            if (e.KeyChar != (char)Keys.Back)
             // Если введена не цифра, не точка, либо вторая точка
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' || e.KeyChar == '.' && box.Text.Contains("."))
                 e.Handled = true;
