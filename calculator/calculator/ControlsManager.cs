@@ -9,11 +9,13 @@ using System.Windows.Forms;
 
 namespace calculator
 {
-    class AddAndClone
+    class ControlsManager
     {
+        // Some... usefull things
+        
         // Fonts
         Font textFont = new Font("Verdana", 10.0F, FontStyle.Italic);
-        Font labelFont = new Font("Verdana", 9.75F, FontStyle.Italic);
+        Font labelFont = new Font("Italic", 9.75F, FontStyle.Italic);
         // Sizes of Controls
         Size labelSize = new Size(26, 16); 
         Size boxSize = new Size(38, 23);
@@ -22,17 +24,17 @@ namespace calculator
         public int gapTop = 38;
         // Control's lists
         public List<List<TextBox>> boxes = new List<List<TextBox>>();
-        public List<List<Label>> labels = new List<List<Label>>();
+        public List<List<RichTextBox>> labels = new List<List<RichTextBox>>();
         // Constructors
-        public AddAndClone()
+        public ControlsManager()
         {
             StartUp();
         }
 
-        public AddAndClone(List<List<TextBox>> oldboxes, List<List<Label>> oldlabels)
+        public ControlsManager(Font font)
         {
-            boxes = oldboxes;
-            labels = oldlabels;
+            labelFont = font;
+            StartUp();
         }
 
         /// <summary>
@@ -67,23 +69,43 @@ namespace calculator
         /// <summary>
         /// Добавялет строку к матрице
         /// </summary>
-        public void AddRow()
+        public bool AddRow()
         {
-            // Fill the class with clone
-            List<TextBox> boxRow = boxes.Last();
-            List<Label> labelRow = labels.Last();
-            
-            boxes.Add(CloneBoxes());      // Clone boxes
-            labels.Add(CloneLabels());    // Clone labels
-            for (int i = 0; i < labels.Last().Count; i++) // Draw new boxes
+            if (boxes.Count < 10)
             {
-                boxes.Last()[i].Text = "0";             // Set the Text to "0"
-                boxes.Last()[i].Top += gapTop;          // Place new box lower
-                labels.Last()[i].Top += gapTop;          // Place new label lower
+                // Fill the class with clone
+                List<TextBox> boxRow = boxes.Last();
+                List<RichTextBox> labelRow = labels.Last();
+
+                boxes.Add(CloneBoxes());      // Clone boxes
+                labels.Add(CloneLabels());    // Clone labels
+                for (int i = 0; i < labels.Last().Count; i++) // Draw new boxes
+                {
+                    boxes.Last()[i].Text = "0";             // Set the Text to "0"
+                    boxes.Last()[i].Top += gapTop;          // Place new box lower
+                    labels.Last()[i].Top += gapTop;          // Place new label lower
+                }
+                // boxes.Count = labels.Count +1
+                boxes.Last().Last().Text = "0";             // Set the Text to "0"
+                boxes.Last().Last().Top += gapTop;          // Place new box lower
+                return true;
             }
-            // boxes.Count = labels.Count +1
-            boxes.Last().Last().Text = "0";             // Set the Text to "0"
-            boxes.Last().Last().Top += gapTop;          // Place new box lower
+            return false;
+        }
+
+        public bool DelRow()
+        {
+            if (boxes.Count > 3)
+            {
+                foreach (TextBox box in boxes.Last())
+                    box.Dispose();
+                foreach (RichTextBox label in labels.Last())
+                    label.Dispose();
+                boxes.RemoveAt(boxes.Count - 1);
+                labels.RemoveAt(labels.Count - 1);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -111,14 +133,14 @@ namespace calculator
         public void StartUp()
         {
             List<TextBox> rowBox;
-            List<Label> rowLabel;
+            List<RichTextBox> rowLabel;
             int left;
             int top = 50;
-            Label label;
+            RichTextBox label;
             for (int j = 0; j < 3; j++)
             {
                 rowBox = new List<TextBox>();
-                rowLabel = new List<Label>();
+                rowLabel = new List<RichTextBox>();
                 left = 50;
                 for (int i = 0; i < 3; i++)
                 {
@@ -127,7 +149,7 @@ namespace calculator
                         label = AddLabel(left + gapLeft, j * gapTop + top, "X" + (i + 1).ToString() + "=");
                     else label = AddLabel(left + gapLeft, j * gapTop + top, "X" + (i + 1).ToString() + "+");
                     rowLabel.Add(label);
-                    left += gapLeft + label.Text.ToString().Length * (int)labelFont.SizeInPoints;
+                    left += gapLeft + labelSize.Width;
                 }
                 rowBox.Add(AddBox(left, j * gapTop + top));
                 boxes.Add(rowBox);
@@ -155,11 +177,11 @@ namespace calculator
         /// Clone labels list (List<Labels>)
         /// </summary>
         /// <returns>List<Label></returns>
-        public List<Label> CloneLabels()
+        public List<RichTextBox> CloneLabels()
         {
-            List<Label> newLabels = new List<Label>();
-            Label newlabel;
-            foreach (Label label in labels.Last())
+            List<RichTextBox> newLabels = new List<RichTextBox>();
+            RichTextBox newlabel;
+            foreach (RichTextBox label in labels.Last())
             {
                 newlabel = AddLabel(label.Left, label.Top, label.Text);
                 newLabels.Add(newlabel);
@@ -192,17 +214,28 @@ namespace calculator
         /// <param name="left"></param>
         /// <param name="top"></param>
         /// <returns>Label</returns>
-        public Label AddLabel(int left, int top, string info)
+        public RichTextBox AddLabel(int left, int top, string info)
         {
-            Label label = new Label();
-            label.Font = labelFont;
-            label.FlatStyle = FlatStyle.System;
-            label.BackColor = Color.WhiteSmoke;
-            label.Size = labelSize;
-            label.Top = top;
-            label.Left = left;
-            label.Text = info;
-            return label;
+            RichTextBox richTextBox = new RichTextBox();
+            richTextBox.Font = labelFont;
+            richTextBox.BorderStyle = BorderStyle.None;
+            richTextBox.BackColor = Color.WhiteSmoke;
+            richTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            richTextBox.ReadOnly = true;
+            richTextBox.ShortcutsEnabled = false;
+            richTextBox.GotFocus += RTBFocus;
+            richTextBox.Size = labelSize;
+            richTextBox.Top = top;
+            richTextBox.Left = left;
+            richTextBox.Text = info;
+            return richTextBox;
+        }
+
+        public void RTBFocus(Object sender, EventArgs e)
+        {
+            RichTextBox rtb = sender as RichTextBox;
+            int j = (rtb.Top - labels.First().First().Top)/gapTop;
+            boxes.Last().Last().Focus();
         }
 
         /// <summary>

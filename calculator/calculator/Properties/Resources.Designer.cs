@@ -63,6 +63,16 @@ namespace calculator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BtnDel {
+            get {
+                object obj = ResourceManager.GetObject("BtnDel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CloseIcon {
             get {
                 object obj = ResourceManager.GetObject("CloseIcon", resourceCulture);
@@ -83,19 +93,9 @@ namespace calculator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ForumCategory {
+        internal static System.Drawing.Bitmap GrayTriangles {
             get {
-                object obj = ResourceManager.GetObject("ForumCategory", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap GrayTriangls {
-            get {
-                object obj = ResourceManager.GetObject("GrayTriangls", resourceCulture);
+                object obj = ResourceManager.GetObject("GrayTriangles", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace calculator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap IconAdd {
+        internal static System.Drawing.Bitmap IconAddFull {
             get {
-                object obj = ResourceManager.GetObject("IconAdd", resourceCulture);
+                object obj = ResourceManager.GetObject("IconAddFull", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,19 @@ namespace calculator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap LightTriangls {
+        internal static System.Drawing.Bitmap LabelBack {
             get {
-                object obj = ResourceManager.GetObject("LightTriangls", resourceCulture);
+                object obj = ResourceManager.GetObject("LabelBack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LightTriangles {
+            get {
+                object obj = ResourceManager.GetObject("LightTriangles", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

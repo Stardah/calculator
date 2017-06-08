@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,21 +17,40 @@ namespace calculator
 {
     public partial class Form1 : Form
     {
-        AddAndClone stuff = new AddAndClone();
+        ControlsManager stuff = new ControlsManager();
         Point dragOffset;
+        public static string ThisName;
 
         //Dictionary<string, Font> fonts = new Dictionary<string, Font>();
         PrivateFontCollection fonts = new PrivateFontCollection();
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect, // x-coordinate of upper-left corner
+            int nTopRect, // y-coordinate of upper-left corner
+            int nRightRect, // x-coordinate of lower-right corner
+            int nBottomRect, // y-coordinate of lower-right corner
+            int nWidthEllipse, // height of ellipse
+            int nHeightEllipse // width of ellipse
+        );
+
+        public string GetName => this.Name;
+
 
         public Form1()
         {
             this.KeyPreview = true;
             InitializeComponent();
+            ThisName = this.Name;
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Rounded Corners
+
             InitFont();
-            
+
             DrawControls(stuff.boxes);
             DrawControls(stuff.labels);
         }
+
         /// <summary>
         /// Apply fonts
         /// </summary>
@@ -45,9 +65,8 @@ namespace calculator
             labelHeader.Font = new Font(fonts.Families[0], 16f, FontStyle.Bold, GraphicsUnit.Point, 0);
             //btnAddRaw.Font = new Font(fonts.Families[0], 14f, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSolve.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            //stuff = new ControlsManager(new Font(fonts.Families[0], 10f, FontStyle.Regular, GraphicsUnit.Point, 0));
         }
-
-
 
         /// <summary>
         /// Adds new row downside
@@ -75,9 +94,9 @@ namespace calculator
         /// <summary>
         /// Отрисовывает все Label'ы
         /// </summary>
-        public void DrawControls(List<List<Label>> list)
+        public void DrawControls(List<List<RichTextBox>> list)
         {
-            foreach (List<Label> item in list)
+            foreach (List<RichTextBox> item in list)
                 this.Controls.AddRange(item.ToArray());
         }
 
@@ -90,6 +109,11 @@ namespace calculator
             this.Controls.Add(control);
         }
 
+        /// <summary>
+        /// Добавляет строку к матрице
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddRow_Click(object sender, EventArgs e)
         {
             AddRow();
@@ -97,6 +121,17 @@ namespace calculator
             {
                 btnAddRaw.Top += stuff.gapTop;
                 btnSolve.Top += stuff.gapTop;
+                btnDel.Top += stuff.gapTop;
+            }
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (stuff.DelRow())
+            {
+                btnAddRaw.Top -= stuff.gapTop;
+                btnSolve.Top -= stuff.gapTop;
+                btnDel.Top -= stuff.gapTop;
             }
         }
 
@@ -110,10 +145,7 @@ namespace calculator
             Application.Exit();
         }
 
-        /// <summary>
-        /// Drag Form
-        /// </summary>
-        /// <param name="e"></param>
+        // Drag Form
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -164,11 +196,7 @@ namespace calculator
             }
         }
 
-        private void btnSolve_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        // Эффекты от наведения и нажатий
         private void btnSolve_MouseEnter(object sender, EventArgs e)
         {
             btnSolve.BackgroundImage = Resources.RoundedButtonLight;
