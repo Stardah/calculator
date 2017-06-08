@@ -43,12 +43,15 @@
             this.btnWolf = new System.Windows.Forms.Button();
             this.textWolfResult = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.panelSystem = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panelSystem.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAddRaw
@@ -62,7 +65,7 @@
             this.btnAddRaw.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddRaw.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAddRaw.ForeColor = System.Drawing.Color.White;
-            this.btnAddRaw.Location = new System.Drawing.Point(84, 199);
+            this.btnAddRaw.Location = new System.Drawing.Point(81, 224);
             this.btnAddRaw.Name = "btnAddRaw";
             this.btnAddRaw.Size = new System.Drawing.Size(32, 32);
             this.btnAddRaw.TabIndex = 1;
@@ -81,7 +84,7 @@
             this.btnSolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSolve.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSolve.ForeColor = System.Drawing.Color.White;
-            this.btnSolve.Location = new System.Drawing.Point(122, 199);
+            this.btnSolve.Location = new System.Drawing.Point(119, 224);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(150, 32);
             this.btnSolve.TabIndex = 2;
@@ -101,9 +104,10 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.labelHeader);
-            this.panel1.Location = new System.Drawing.Point(319, 27);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(321, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(267, 371);
+            this.panel1.Size = new System.Drawing.Size(265, 268);
             this.panel1.TabIndex = 3;
             // 
             // label4
@@ -149,7 +153,7 @@
             this.labelHeader.Image = global::calculator.Properties.Resources.LabelBack;
             this.labelHeader.Location = new System.Drawing.Point(0, 0);
             this.labelHeader.Name = "labelHeader";
-            this.labelHeader.Size = new System.Drawing.Size(267, 45);
+            this.labelHeader.Size = new System.Drawing.Size(265, 45);
             this.labelHeader.TabIndex = 0;
             this.labelHeader.Text = "Решение";
             this.labelHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -163,8 +167,8 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(586, 27);
             this.panel2.TabIndex = 5;
-            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
-            this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelMouseDown);
+            this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelMouseMove);
             // 
             // btnClose
             // 
@@ -194,7 +198,7 @@
             this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnDel.ForeColor = System.Drawing.Color.White;
-            this.btnDel.Location = new System.Drawing.Point(46, 199);
+            this.btnDel.Location = new System.Drawing.Point(43, 224);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(32, 32);
             this.btnDel.TabIndex = 6;
@@ -204,7 +208,7 @@
             // textWoldQuery
             // 
             this.textWoldQuery.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textWoldQuery.Location = new System.Drawing.Point(68, 40);
+            this.textWoldQuery.Location = new System.Drawing.Point(67, 30);
             this.textWoldQuery.Name = "textWoldQuery";
             this.textWoldQuery.Size = new System.Drawing.Size(201, 23);
             this.textWoldQuery.TabIndex = 7;
@@ -221,7 +225,7 @@
             this.btnWolf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWolf.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnWolf.ForeColor = System.Drawing.Color.White;
-            this.btnWolf.Location = new System.Drawing.Point(210, 82);
+            this.btnWolf.Location = new System.Drawing.Point(211, 59);
             this.btnWolf.Name = "btnWolf";
             this.btnWolf.Size = new System.Drawing.Size(150, 24);
             this.btnWolf.TabIndex = 7;
@@ -233,7 +237,7 @@
             // textWolfResult
             // 
             this.textWolfResult.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textWolfResult.Location = new System.Drawing.Point(307, 40);
+            this.textWolfResult.Location = new System.Drawing.Point(306, 30);
             this.textWolfResult.Name = "textWolfResult";
             this.textWolfResult.Size = new System.Drawing.Size(201, 23);
             this.textWolfResult.TabIndex = 8;
@@ -249,34 +253,10 @@
             this.panel3.Controls.Add(this.textWolfResult);
             this.panel3.Controls.Add(this.textWoldQuery);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 284);
+            this.panel3.Location = new System.Drawing.Point(0, 295);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(586, 118);
+            this.panel3.Size = new System.Drawing.Size(586, 95);
             this.panel3.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(67, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 16);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "ВЫРАЖЕНИЕ";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(435, 21);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 16);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "РЕШЕНИЕ";
             // 
             // label6
             // 
@@ -284,11 +264,63 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(275, 40);
+            this.label6.Location = new System.Drawing.Point(274, 30);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(26, 23);
             this.label6.TabIndex = 10;
             this.label6.Text = "=";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(434, 11);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(79, 16);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "РЕШЕНИЕ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(66, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 16);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "ВЫРАЖЕНИЕ";
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label7.Font = new System.Drawing.Font("Bell MT", 14.25F, System.Drawing.FontStyle.Bold);
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Image = global::calculator.Properties.Resources.LabelBack;
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(321, 45);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Система уравнений";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panelSystem
+            // 
+            this.panelSystem.BackColor = System.Drawing.Color.Transparent;
+            this.panelSystem.Controls.Add(this.label7);
+            this.panelSystem.Controls.Add(this.btnDel);
+            this.panelSystem.Controls.Add(this.btnAddRaw);
+            this.panelSystem.Controls.Add(this.btnSolve);
+            this.panelSystem.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelSystem.Location = new System.Drawing.Point(0, 27);
+            this.panelSystem.Name = "panelSystem";
+            this.panelSystem.Size = new System.Drawing.Size(321, 268);
+            this.panelSystem.TabIndex = 11;
             // 
             // Form1
             // 
@@ -296,13 +328,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::calculator.Properties.Resources.LightTriangles;
-            this.ClientSize = new System.Drawing.Size(586, 402);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.btnDel);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(586, 390);
+            this.Controls.Add(this.panelSystem);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnSolve);
-            this.Controls.Add(this.btnAddRaw);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel3);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -312,6 +342,7 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panelSystem.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -334,6 +365,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panelSystem;
     }
 }
 

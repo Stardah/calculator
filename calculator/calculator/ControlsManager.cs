@@ -72,7 +72,7 @@ namespace calculator
         /// </summary>
         public bool AddRow()
         {
-            if (boxes.Count < 5)
+            if (boxes.Count < 4)
             {
                 // Fill the class with clone
                 List<TextBox> boxRow = boxes.Last();
@@ -136,13 +136,13 @@ namespace calculator
             List<TextBox> rowBox;
             List<RichTextBox> rowLabel;
             int left;
-            int top = 50;
+            int top = 70;
             RichTextBox label;
             for (int j = 0; j < 3; j++)
             {
                 rowBox = new List<TextBox>();
                 rowLabel = new List<RichTextBox>();
-                left = 50;
+                left = 40;
                 for (int i = 0; i < 3; i++)
                 {
                     rowBox.Add(AddBox(left, j * gapTop + top));
@@ -212,6 +212,8 @@ namespace calculator
             textBox.Left = left;
             textBox.Text = "0";
             textBox.KeyPress += KeyHandler;
+            textBox.BorderStyle = BorderStyle.FixedSingle;
+            textBox.TextAlign = HorizontalAlignment.Center;
             textBox.PreviewKeyDown += new PreviewKeyDownEventHandler(BoxPreviewKeyDown);
             return textBox;
         }

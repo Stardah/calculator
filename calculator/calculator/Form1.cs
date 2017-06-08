@@ -41,14 +41,14 @@ namespace calculator
         public Form1()
         {
             this.KeyPreview = true;
-            DrawControls(stuff.boxes);
-            DrawControls(stuff.labels);
             InitializeComponent();
             // Раздаём двойную буфферизацию всем потомкам
             int style = NativeWinAPI.GetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE);
             style |= NativeWinAPI.WS_EX_COMPOSITED;
             NativeWinAPI.SetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE, style);
             //
+            DrawControls(stuff.boxes);
+            DrawControls(stuff.labels);
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Rounded Corners
             InitFont();
             InitControls();
@@ -94,7 +94,7 @@ namespace calculator
         public void DrawControls(List<List<TextBox>> list)
         {
             foreach (List<TextBox> item in list)
-                this.Controls.AddRange(item.ToArray());
+                this.panelSystem.Controls.AddRange(item.ToArray());
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace calculator
         public void DrawControls(List<List<RichTextBox>> list)
         {
             foreach (List<RichTextBox> item in list)
-                this.Controls.AddRange(item.ToArray());
+                this.panelSystem.Controls.AddRange(item.ToArray());
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace calculator
         /// <param name="control"></param>
         public void DrawOneControl(Control control)
         {
-            this.Controls.Add(control);
+            this.panelSystem.Controls.Add(control);
         }
 
         /// <summary>
@@ -135,9 +135,9 @@ namespace calculator
         {
             if (stuff.DelRow())
             {
-                btnAddRaw.Top -= stuff.gapTop;
-                btnSolve.Top -= stuff.gapTop;
-                btnDel.Top -= stuff.gapTop;
+                //btnAddRaw.Top -= stuff.gapTop;
+                //btnSolve.Top -= stuff.gapTop;
+                //btnDel.Top -= stuff.gapTop;
             }
         }
 
@@ -146,6 +146,7 @@ namespace calculator
             stuff.GetArray();
         }
 
+        // Exit button
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -178,7 +179,7 @@ namespace calculator
             }
         }
 
-        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        private void panelMouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -189,7 +190,7 @@ namespace calculator
             }
         }
 
-        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        private void panelMouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -225,6 +226,7 @@ namespace calculator
             btn.BackgroundImage = Resources.RoundedButton2;
         }
 
+        // Wolfram
         private void btnWolf_Click(object sender, EventArgs e)
         {
             textWolfResult.Text = wolf.SolveThis(textWoldQuery.Text);
