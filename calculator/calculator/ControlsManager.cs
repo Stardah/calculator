@@ -235,7 +235,8 @@ namespace calculator
         {
             RichTextBox rtb = sender as RichTextBox;
             int j = (rtb.Top - labels.First().First().Top)/gapTop;
-            boxes.Last().Last().Focus();
+            int i = (rtb.Left - boxes.First().First().Left) / (gapLeft + labelSize.Width);
+            boxes[j][i].Focus();
         }
 
         /// <summary>
