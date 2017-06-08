@@ -49,7 +49,7 @@
     <Compile Include="BD.cs" />
     <Compile Include="CalculationException.cs" />
     <Compile Include="Calculator.cs" />
-    <Compile Include="CloneClass.cs" />
+    <Compile Include="ControlsManager.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,7 +69,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Fonts\Exo2.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -80,9 +82,49 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="README.md" />
+    <None Include="Resources\Exo2.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vertex.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forum-category.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page-ddd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon_31-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buttonblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RoundedButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RoundedButton2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RoundedButtonLight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RoundedButtonDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playstation-cross-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

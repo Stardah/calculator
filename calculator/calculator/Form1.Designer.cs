@@ -34,48 +34,67 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelHeader = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAddRaw
             // 
-            this.btnAddRaw.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnAddRaw.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAddRaw.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddRaw.BackgroundImage = global::calculator.Properties.Resources.IconAdd;
+            this.btnAddRaw.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddRaw.FlatAppearance.BorderSize = 0;
+            this.btnAddRaw.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddRaw.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAddRaw.ForeColor = System.Drawing.Color.White;
-            this.btnAddRaw.Location = new System.Drawing.Point(91, 160);
+            this.btnAddRaw.Location = new System.Drawing.Point(74, 196);
             this.btnAddRaw.Name = "btnAddRaw";
             this.btnAddRaw.Size = new System.Drawing.Size(32, 32);
             this.btnAddRaw.TabIndex = 1;
-            this.btnAddRaw.Text = "+";
             this.btnAddRaw.UseVisualStyleBackColor = false;
             this.btnAddRaw.Click += new System.EventHandler(this.btnAddRow_Click);
             // 
             // btnSolve
             // 
-            this.btnSolve.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnSolve.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSolve.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSolve.BackColor = System.Drawing.Color.Transparent;
+            this.btnSolve.BackgroundImage = global::calculator.Properties.Resources.RoundedButton2;
+            this.btnSolve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSolve.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnSolve.FlatAppearance.BorderSize = 0;
+            this.btnSolve.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSolve.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSolve.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSolve.ForeColor = System.Drawing.Color.White;
-            this.btnSolve.Location = new System.Drawing.Point(152, 160);
+            this.btnSolve.Location = new System.Drawing.Point(112, 196);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(101, 32);
+            this.btnSolve.Size = new System.Drawing.Size(150, 32);
             this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "Решить";
             this.btnSolve.UseVisualStyleBackColor = false;
             this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
+            this.btnSolve.Paint += new System.Windows.Forms.PaintEventHandler(this.btnSolve_Paint);
+            this.btnSolve.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSolve_MouseDown);
+            this.btnSolve.MouseEnter += new System.EventHandler(this.btnSolve_MouseEnter);
+            this.btnSolve.MouseLeave += new System.EventHandler(this.btnSolve_MouseLeave);
+            this.btnSolve.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnSolve_MouseUp);
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BackgroundImage = global::calculator.Properties.Resources.ForumCategory;
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(325, 0);
+            this.panel1.Controls.Add(this.labelHeader);
+            this.panel1.Location = new System.Drawing.Point(325, 26);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(304, 513);
+            this.panel1.Size = new System.Drawing.Size(304, 403);
             this.panel1.TabIndex = 3;
             // 
             // label4
@@ -108,15 +127,49 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Х =";
             // 
-            // label1
+            // labelHeader
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(103, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Решение";
+            this.labelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.labelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelHeader.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelHeader.Font = new System.Drawing.Font("Bell MT", 14.25F, System.Drawing.FontStyle.Bold);
+            this.labelHeader.ForeColor = System.Drawing.Color.White;
+            this.labelHeader.Image = global::calculator.Properties.Resources.ForumCategory;
+            this.labelHeader.Location = new System.Drawing.Point(0, 0);
+            this.labelHeader.Name = "labelHeader";
+            this.labelHeader.Size = new System.Drawing.Size(304, 45);
+            this.labelHeader.TabIndex = 0;
+            this.labelHeader.Text = "Решение";
+            this.labelHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = global::calculator.Properties.Resources.Header;
+            this.panel2.Controls.Add(this.btnClose);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(629, 26);
+            this.panel2.TabIndex = 5;
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
+            this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.Transparent;
+            this.btnClose.BackgroundImage = global::calculator.Properties.Resources.CloseIcon;
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Location = new System.Drawing.Point(603, 0);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(26, 26);
+            this.btnClose.TabIndex = 0;
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // Form1
             // 
@@ -124,15 +177,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(629, 513);
+            this.BackgroundImage = global::calculator.Properties.Resources.LightTriangls;
+            this.ClientSize = new System.Drawing.Size(629, 429);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSolve);
             this.Controls.Add(this.btnAddRaw);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "Form1";
             this.Text = "Решение системы уравнений";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -144,7 +201,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelHeader;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnClose;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using calculator.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -112,7 +113,7 @@ namespace calculator
             List<TextBox> rowBox;
             List<Label> rowLabel;
             int left;
-            int top = 20;
+            int top = 50;
             Label label;
             for (int j = 0; j < 3; j++)
             {
@@ -196,6 +197,7 @@ namespace calculator
             Label label = new Label();
             label.Font = labelFont;
             label.FlatStyle = FlatStyle.System;
+            label.BackColor = Color.WhiteSmoke;
             label.Size = labelSize;
             label.Top = top;
             label.Left = left;
