@@ -12,9 +12,12 @@ namespace calculator
 {
     public partial class Form1 : Form
     {
-        ControlsManager stuff = new ControlsManager();
+        ControlsManager stuff;
         Wolfram wolf = new Wolfram();
         Point dragOffset;
+
+        Point formLeft;
+        Point formTop;
 
         //Dictionary<string, Font> fonts = new Dictionary<string, Font>();
         PrivateFontCollection fonts = new PrivateFontCollection();
@@ -47,8 +50,11 @@ namespace calculator
             style |= NativeWinAPI.WS_EX_COMPOSITED;
             NativeWinAPI.SetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE, style);
             //
+            stuff = new ControlsManager(this.Width, this.Height);
             DrawControls(stuff.boxes);
             DrawControls(stuff.labels);
+            formLeft = new Point(this.Left, this.Width);
+            formTop = new Point(this.Top, this.Height);
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Rounded Corners
             InitFont();
             InitControls();
@@ -80,7 +86,12 @@ namespace calculator
             panel3.MouseDown += panelMouseDown;
             panelSystem.MouseMove += panelMouseMove;
             panelSystem.MouseDown += panelMouseDown;
+        }
 
+        public void CloseForms()
+        {
+            stuff.Close();
+            Application.Exit();
         }
 
         /// <summary>
@@ -158,7 +169,7 @@ namespace calculator
         // Exit button
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            CloseForms();
         }
 
         // Drag Form
@@ -239,6 +250,11 @@ namespace calculator
         private void btnWolf_Click(object sender, EventArgs e)
         {
             textWolfResult.Text = wolf.SolveThis(textWoldQuery.Text);
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            stuff.ShowToast("Решайте системы линейных уравнений!", "Здравствуйте!", this.Left, this.Top);
         }
     }
 }

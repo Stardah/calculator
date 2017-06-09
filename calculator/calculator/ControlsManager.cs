@@ -11,7 +11,13 @@ namespace calculator
 {
     class ControlsManager
     {
-        // Fonts
+        // Const
+        int toastTopMargin = 150; // Сдвиг относительно низа формы 
+        int toastLeftMargin = 130; // Сдвиг относительно центра формы 
+        // Var
+        public int formWidth;
+        public int formHeight;
+        // Fonts1
         Font textFont = new Font("Verdana", 10.0F, FontStyle.Regular);
         Font labelFont = new Font("Italic", 9.75F, FontStyle.Regular);
         // Sizes of Controls
@@ -23,16 +29,33 @@ namespace calculator
         // Control's lists
         public List<List<TextBox>> boxes = new List<List<TextBox>>();
         public List<List<RichTextBox>> labels = new List<List<RichTextBox>>();
+        public List<Toast> toasts = new List<Toast>();
         // Constructors
-        public ControlsManager()
+        public ControlsManager(int width, int height)
         {
+            this.formWidth = width;
+            this.formHeight = height;
             StartUp();
         }
 
-        public ControlsManager(Font font)
+        public ControlsManager(Font font, int width, int height)
         {
+            this.formWidth = width;
+            this.formHeight = height;
             labelFont = font;
             StartUp();
+        }
+
+        /// <summary>
+        /// Менеджер становится child-free
+        /// </summary>
+        public void Close()
+        {
+            for (int i = toasts.Count - 1; i >= 0; i--)
+            {
+                toasts[i].Close();
+                toasts.RemoveAt(i);
+            }
         }
 
         /// <summary>
@@ -65,6 +88,19 @@ namespace calculator
                     array[i, j] = double.Parse(list[i][j].Text.Replace(".", ",")); // Double кушает только запятые
                 }
             return array;
+        }
+
+        /// <summary>
+        /// Выводит Toast
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="info"></param>
+        public void ShowToast(string text, string info, int left, int top)
+        {
+            toasts.Add(new Toast(text, info));
+            toasts.Last().Left = left + formWidth/2 - toasts.Last().Width / 2 + toastLeftMargin;
+            toasts.Last().Top = top + formHeight - toastTopMargin;
+            toasts.Last().Show();
         }
 
         /// <summary>
