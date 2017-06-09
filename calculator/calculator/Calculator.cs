@@ -12,58 +12,6 @@ namespace calculator
     /// </summary>
     public class Calculator
     {
-        public class Matrix
-        {
-            Matrix(params double[] coeffs)
-            {
-                if (coeffs.Length != MatrixSize * MatrixSize)
-                    throw new ArgumentException("Некорректное количество элементов матрицы.");
-
-                int i = 0;
-
-                foreach (var v in coeffs)
-                    m[i % MatrixSize, i / MatrixSize] = v;
-            }
-
-            public Matrix(double[,] matrix)
-            {
-                matrix.CopyTo(m, 0);
-            }
-
-            public static Matrix operator-(Matrix matrix)
-            {
-                throw new NotImplementedException();
-            }
-
-            public double Determinant()
-            {
-                return
-                    m[0, 0] * m[1, 1] * m[2, 2] +
-                    m[1, 0] * m[2, 1] * m[0, 2] +
-                    m[2, 0] * m[0, 1] * m[1, 2] -
-
-                    m[2, 0] * m[1, 1] * m[0, 2] -
-                    m[0, 0] * m[2, 1] * m[1, 2] -
-                    m[1, 0] * m[0, 1] * m[2, 2];
-            }
-
-            public void Transpone()
-            {
-                double[,] temp = new double[MatrixSize, MatrixSize];
-
-                int i = 0;
-
-                foreach (var v in m)
-                    temp[i / MatrixSize, i % MatrixSize] = v;
-
-                m = temp;
-            }
-
-            private const int MatrixSize = 3;
-
-            private double[,] m = new double[MatrixSize, MatrixSize];
-        }
-
         /// <summary>
         /// Конструктор по умолчанию.
         /// </summary>
@@ -73,9 +21,26 @@ namespace calculator
         }
 
         /// <summary>
+        /// Индексатор по свободным членам.
+        /// </summary>
+        /// <param name="index">Индекс свободного члена (с 0).</param>
+        /// <returns></returns>
+        public double this[int index]
+        {
+            get
+            {
+                return free[index];
+            }
+            set
+            {
+                free[index] = value;
+            }
+        }
+
+        /// <summary>
         /// Индексатор по системе уравнений.
-        /// Нумерация с 1, как в матане.
-        /// Индекс 0 для свободного члена.
+        /// Нумерация с 0.
+        /// Для свободных членов другой индексатор.
         /// </summary>
         /// <param name="variableIndex">Индекс переменной.</param>
         /// <param name="equationIndex">Индекс уравнения.</param>
@@ -84,11 +49,11 @@ namespace calculator
         {
             get
             {
-                return coeffs[equationIndex][variableIndex];
+                return matrix[equationIndex, variableIndex];
             }
             set
             {
-                coeffs[equationIndex][variableIndex] = value;
+                matrix[equationIndex, variableIndex] = value;
             }
         }
 
@@ -97,7 +62,7 @@ namespace calculator
         /// </summary>
         public void Clear()
         {
-            coeffs = new List<List<double>>();
+            matrix = new Matrix3();
         }
 
         /// <summary>
@@ -108,30 +73,31 @@ namespace calculator
         /// <exception cref="CalculationException">Отсутствуют решения системы.</exception>
         public double[] Solve()
         {
-            if (coeffs.Count < EquationNumber)
-                throw new CalculationException("Неверное количество уравнений.");
+            var inv = BaseMatrix.Copy(matrix).Inverse();
+            var x = new double[EquationNumber];
+            x[0] = inv[0, 0] * free[0] + inv[1, 0] * free[1] + inv[2, 0] * free[2];
+            x[1] = inv[0, 1] * free[0] + inv[1, 1] * free[1] + inv[2, 1] * free[2];
+            x[2] = inv[0, 2] * free[0] + inv[1, 2] * free[1] + inv[2, 2] * free[2];
 
-            double[,] matrixVar = new double[EquationNumber, coeffs.Count];
-            double[] matrixFree = new double[coeffs.Count];
+            return x;
+        }
 
-            // Индекс уравнения в цикле.
-            int eq = 0;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="variableCoeffs"></param>
+        /// <param name="freeCoeffs"></param>
+        /// <returns></returns>
+        /// <exception cref="CalculationException">Отсутствуют решения системы.</exception>
+        public double[] Solve(Matrix3 variableCoeffs, double[] freeCoeffs)
+        {
+            var inv = BaseMatrix.Copy(variableCoeffs).Inverse();
+            var x = new double[EquationNumber];
+            x[0] = inv[0, 0] * freeCoeffs[0] + inv[1, 0] * freeCoeffs[1] + inv[2, 0] * freeCoeffs[2];
+            x[1] = inv[0, 1] * freeCoeffs[0] + inv[1, 1] * freeCoeffs[1] + inv[2, 1] * freeCoeffs[2];
+            x[2] = inv[0, 2] * freeCoeffs[0] + inv[1, 2] * freeCoeffs[1] + inv[2, 2] * freeCoeffs[2];
 
-            // Перебираем все элементы массива и строим матрицу.
-            // В случае отсутствия коэффициента(-ов) приравниваем их к нулю.
-            foreach (var v in coeffs)
-            {
-                if (v.Count > EquationNumber + 1)
-                    throw new CalculationException("Слишком много переменных.");
-
-                // Заполняем матрицу свободных членов.
-                matrixFree[eq] = v[0];
-
-                // Заполняем матрицу переменных коэффициентами.
-                for (int i = 1; i < EquationNumber; ++i)
-                    matrixVar[i - 1, eq] = (v.Count > i) ? v[i] : 0;
-            }
-            return new double[]{0};
+            return x;
         }
 
         private const int EquationNumber = 3;
@@ -139,6 +105,11 @@ namespace calculator
         /// <summary>
         /// Список уравнений.
         /// </summary>
-        private List<List<double>> coeffs;
+        private Matrix3 matrix;
+
+        /// <summary>
+        /// Список свободных членов.
+        /// </summary>
+        private double[] free = new double[EquationNumber];
     }
 }

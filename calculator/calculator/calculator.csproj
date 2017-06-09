@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseMatrix.cs" />
     <Compile Include="BD.cs" />
     <Compile Include="CalculationException.cs" />
     <Compile Include="Calculator.cs" />
@@ -68,6 +69,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Matrix2.cs" />
+    <Compile Include="Matrix3.cs" />
     <Compile Include="NiceLoad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
