@@ -99,13 +99,17 @@ namespace calculator
         /// </summary>
         public void AddRow()
         {
-            stuff.AddRow();
-            for (int i = 0; i < stuff.labels.Last().Count; i++) // Draw new boxes and labels
+            if (stuff.AddRow())
             {
-                DrawOneControl(stuff.boxes.Last()[i]);
-                DrawOneControl(stuff.labels.Last()[i]);
+                for (int i = 0; i < stuff.labels.Last().Count; i++) // Draw new boxes and labels
+                {
+                    DrawOneControl(stuff.boxes.Last()[i]);
+                    DrawOneControl(stuff.labels.Last()[i]);
+                }
+                DrawOneControl(stuff.boxes.Last().Last()); // boxes.Count = labels.Count +1
+                stuff.ShowToast("Строка добавлена", "Готово", this.Left, this.Top);
             }
-            DrawOneControl(stuff.boxes.Last().Last()); // boxes.Count = labels.Count +1
+            else stuff.ShowToast("Достигнут предел количества строк", "Оказия", this.Left, this.Top);
         }
 
         /// <summary>
@@ -158,7 +162,9 @@ namespace calculator
                 //btnAddRaw.Top -= stuff.gapTop;
                 //btnSolve.Top -= stuff.gapTop;
                 //btnDel.Top -= stuff.gapTop;
+                stuff.ShowToast("Строка удалена", "Готово", this.Left, this.Top);
             }
+            else stuff.ShowToast("Нельзя удалить первые две строки", "Оказия", this.Left, this.Top);
         }
 
         private void btnSolve_Click(object sender, EventArgs e)
@@ -250,11 +256,19 @@ namespace calculator
         private void btnWolf_Click(object sender, EventArgs e)
         {
             textWolfResult.Text = wolf.SolveThis(textWoldQuery.Text);
+            if (textWolfResult.Text != "") stuff.ShowToast("Значение получено", "Готово", this.Left, this.Top);
+            else stuff.ShowToast("Не удалось найти значение выражения", "Оказия", this.Left, this.Top);
         }
 
         private void Form1_Shown(object sender, EventArgs e)
         {
             stuff.ShowToast("Решайте системы линейных уравнений!", "Здравствуйте!", this.Left, this.Top);
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            stuff.Clear();
+            stuff.ShowToast("Значения индексов обнулены", "Готово", this.Left, this.Top);
         }
     }
 }

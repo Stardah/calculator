@@ -58,6 +58,13 @@ namespace calculator
             }
         }
 
+        public void Clear()
+        {
+            foreach (List<TextBox> rowBox in boxes)
+                foreach (TextBox box in rowBox)
+                    box.Text = "0";
+        }
+
         /// <summary>
         /// Возвращает массив коэффициентов
         /// </summary>

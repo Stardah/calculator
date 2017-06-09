@@ -41,7 +41,7 @@ namespace calculator
                     info = info.Remove(0, info.IndexOf("Decimal") + 7 + 14);
                 }
                 else if (info.Contains("Result")) info = info.Remove(0, info.IndexOf("Result") + 6);
-                else return "неизвестно";
+                else return "";
             int i = 0;
             foreach (char ch in info)
             {
