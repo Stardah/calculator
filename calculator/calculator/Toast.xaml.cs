@@ -8,12 +8,17 @@ namespace calculator
     /// <summary>
     /// Interaction logic for Toast.xaml
     /// </summary>
-    public partial class Toast
+    public partial class Toast : Window
     {
-        public Toast(string text, string info)
+        /// <summary>
+        /// Выкатывает тост с заданным текстом и заголовком
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="header"></param>
+        public Toast(string text, string header)
         {
             InitializeComponent();
-            this.info.Text = info;
+            this.info.Text = header;
             this.text.Text = text;
             StartCloseTimer();
         }
@@ -38,7 +43,11 @@ namespace calculator
             timer.Stop();
             timer.Tick -= TimerTick;
             Close();
-            //Application.Current.Shutdown();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
         }
     }
 }
