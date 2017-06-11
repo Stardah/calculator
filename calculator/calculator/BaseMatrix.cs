@@ -30,6 +30,7 @@ namespace calculator
         {
             if (matrix.Length != m_matrixSize * m_matrixSize)
                 throw new ArgumentException("Некорректное количество элементов матрицы.");
+
             m_matrixSize = 3;
             m = matrix;
         }
