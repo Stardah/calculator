@@ -49,6 +49,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.panelSystem = new System.Windows.Forms.Panel();
             this.btnClear = new System.Windows.Forms.Button();
+            this.RTBSolution = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -101,6 +102,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
+            this.panel1.Controls.Add(this.RTBSolution);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -328,7 +330,7 @@
             this.btnClear.BackColor = System.Drawing.Color.Transparent;
             this.btnClear.BackgroundImage = global::calculator.Properties.Resources.trashbin;
             this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
@@ -341,6 +343,14 @@
             this.btnClear.TabIndex = 11;
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // RTBSolution
+            // 
+            this.RTBSolution.Location = new System.Drawing.Point(95, 63);
+            this.RTBSolution.Name = "RTBSolution";
+            this.RTBSolution.Size = new System.Drawing.Size(116, 154);
+            this.RTBSolution.TabIndex = 4;
+            this.RTBSolution.Text = "";
             // 
             // Form1
             // 
@@ -389,6 +399,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panelSystem;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.RichTextBox RTBSolution;
     }
 }
 

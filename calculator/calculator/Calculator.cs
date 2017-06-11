@@ -20,6 +20,12 @@ namespace calculator
             Clear();
         }
 
+        public Calculator(double[,] array)
+        {
+            SetMatrix(array);
+        }
+
+
         /// <summary>
         /// Индексатор по свободным членам.
         /// </summary>
@@ -65,6 +71,11 @@ namespace calculator
             matrix = new Matrix3();
         }
 
+        public void SetMatrix(double[,] coeffs)
+        {
+            matrix = new Matrix3(coeffs);
+        }
+
         /// <summary>
         /// Решить текущую систему уравнений. Возвращает массив решений.
         /// Если система не может быть разрешена, то выбрасывается исключение.
@@ -80,6 +91,12 @@ namespace calculator
             x[2] = inv[0, 2] * free[0] + inv[1, 2] * free[1] + inv[2, 2] * free[2];
 
             return x;
+        }
+
+        public string Whatsup()
+        {
+
+            return "Пока что ничего не решено";
         }
 
         /// <summary>
