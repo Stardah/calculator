@@ -35,11 +35,11 @@ namespace calculator
         {
             get
             {
-                return free[index];
+                return m_free[index];
             }
             set
             {
-                free[index] = value;
+                m_free[index] = value;
             }
         }
 
@@ -55,11 +55,11 @@ namespace calculator
         {
             get
             {
-                return matrix[equationIndex, variableIndex];
+                return m_matrix[equationIndex, variableIndex];
             }
             set
             {
-                matrix[equationIndex, variableIndex] = value;
+                m_matrix[equationIndex, variableIndex] = value;
             }
         }
 
@@ -68,12 +68,20 @@ namespace calculator
         /// </summary>
         public void Clear()
         {
-            matrix = new Matrix3();
+            m_matrix = new Matrix3();
         }
 
         public void SetMatrix(double[,] coeffs)
         {
-            matrix = new Matrix3(coeffs);
+            m_matrix = new Matrix3(coeffs);
+        }
+
+        public void SetFree(params double[] free)
+        {
+            if (free.Length != EquationNumber)
+                throw new ArgumentException("Неверное количество свободных членов.");
+
+            Array.Copy(free, m_free, EquationNumber);
         }
 
         /// <summary>
@@ -84,13 +92,7 @@ namespace calculator
         /// <exception cref="CalculationException">Отсутствуют решения системы.</exception>
         public double[] Solve()
         {
-            return Solve(matrix, free);
-        }
-
-        public string Whatsup()
-        {
-
-            return "Пока что ничего не решено";
+            return Solve(m_matrix, m_free);
         }
 
         /// <summary>
@@ -116,11 +118,11 @@ namespace calculator
         /// <summary>
         /// Список уравнений.
         /// </summary>
-        private Matrix3 matrix;
+        private Matrix3 m_matrix;
 
         /// <summary>
         /// Список свободных членов.
         /// </summary>
-        private double[] free = new double[EquationNumber];
+        private double[] m_free = new double[EquationNumber];
     }
 }
