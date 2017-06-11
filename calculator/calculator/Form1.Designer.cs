@@ -49,12 +49,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.out1 = new System.Windows.Forms.RichTextBox();
+            this.out2 = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.out3 = new System.Windows.Forms.RichTextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -110,15 +110,15 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
-            this.panel1.Controls.Add(this.richTextBox3);
+            this.panel1.Controls.Add(this.out3);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.richTextBox2);
+            this.panel1.Controls.Add(this.out2);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Controls.Add(this.out1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label2);
@@ -157,7 +157,7 @@
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
-            this.btnClose.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClose.BackgroundImage")));
+            this.btnClose.BackgroundImage = global::calculator.Properties.Resources.closeSQR;
             this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -357,27 +357,27 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "=";
             // 
-            // richTextBox1
+            // out1
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox1.Location = new System.Drawing.Point(86, 65);
-            this.richTextBox1.Multiline = false;
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
-            this.richTextBox1.Size = new System.Drawing.Size(130, 21);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
+            this.out1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.out1.Location = new System.Drawing.Point(86, 65);
+            this.out1.Multiline = false;
+            this.out1.Name = "out1";
+            this.out1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
+            this.out1.Size = new System.Drawing.Size(145, 21);
+            this.out1.TabIndex = 4;
+            this.out1.Text = "";
             // 
-            // richTextBox2
+            // out2
             // 
-            this.richTextBox2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox2.Location = new System.Drawing.Point(86, 104);
-            this.richTextBox2.Multiline = false;
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
-            this.richTextBox2.Size = new System.Drawing.Size(130, 21);
-            this.richTextBox2.TabIndex = 8;
-            this.richTextBox2.Text = "";
+            this.out2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.out2.Location = new System.Drawing.Point(86, 104);
+            this.out2.Multiline = false;
+            this.out2.Name = "out2";
+            this.out2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
+            this.out2.Size = new System.Drawing.Size(145, 21);
+            this.out2.TabIndex = 8;
+            this.out2.Text = "";
             // 
             // label8
             // 
@@ -409,16 +409,16 @@
             this.label10.TabIndex = 5;
             this.label10.Text = "X";
             // 
-            // richTextBox3
+            // out3
             // 
-            this.richTextBox3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox3.Location = new System.Drawing.Point(86, 140);
-            this.richTextBox3.Multiline = false;
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
-            this.richTextBox3.Size = new System.Drawing.Size(130, 21);
-            this.richTextBox3.TabIndex = 12;
-            this.richTextBox3.Text = "";
+            this.out3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.out3.Location = new System.Drawing.Point(86, 140);
+            this.out3.Multiline = false;
+            this.out3.Name = "out3";
+            this.out3.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
+            this.out3.Size = new System.Drawing.Size(145, 21);
+            this.out3.TabIndex = 12;
+            this.out3.Text = "";
             // 
             // label11
             // 
@@ -497,12 +497,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.RichTextBox out1;
+        private System.Windows.Forms.RichTextBox out3;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox out2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;

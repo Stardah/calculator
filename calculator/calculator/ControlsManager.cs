@@ -73,6 +73,8 @@ namespace calculator
             }
         }
         private List<Toast> toasts = new List<Toast>();
+        // Calculator itself
+        Calculator calc;
         // Constructors
         public ControlsManager(int width, int height)
         {
@@ -121,41 +123,57 @@ namespace calculator
         /// Возвращает массив коэффициентов
         /// </summary>
         /// <returns>double[,]</returns>
-        public double[,] GetArray()
+        public double[,] GetCoeffs()
         {
-            return ScanArray(boxes);
+            return ScanArray(true);
         }
 
         /// <summary>
         /// Переводит список списков TextBox в массив double[,]
         /// </summary>
         /// <param name="list"></param>
+        /// <param name="coeffs">Выводить коэффициенты или свободные члены</param>
         /// <returns>double[,]</returns>
-        private double[,] ScanArray(List<List<TextBox>> list)
+        private double[,] ScanArray(bool coeffs)
         {
-            double[,] array = new double[list.Count, list.Last().Count];
-            for (int i = 0; i < list.Count; i++)
-                for (int j = 0; j < list.Last().Count; j++)
+            int jstart = 0;
+            int jend = 3;
+            if (!coeffs)
+            {
+                jstart = 3;
+                jend = 4;
+            }
+            double[,] array = new double[boxes.Count, jend - jstart];
+            for (int i = 0; i < boxes.Count; i++)
+                for (int j = jstart; j < jend; j++)
                 {
-                    if (list[i][j].Text == "")
-                        list[i][j].Text = "0";
-                    if (list[i][j].Text.ToString().First() == '.') // Если первый символ - точка (.123)
-                        list[i][j].Text = "0"+ list[i][j].Text; 
-                    if (list[i][j].Text.ToString().Last() == '.') // Если последний символ точка (123.)
-                        list[i][j].Text += "0";
-                    if (list[i][j].Text.ToString().Length > 8) list[i][j].Text = list[i][j].Text.ToString().Remove(8);
-                    array[i, j] = double.Parse(list[i][j].Text.Replace(".", ",")); // Double кушает только запятые
+                    if (boxes[i][j].Text == "")
+                        boxes[i][j].Text = "0";
+                    if (boxes[i][j].Text.ToString().First() == '.') // Если первый символ - точка (.123)
+                        boxes[i][j].Text = "0"+ boxes[i][j].Text; 
+                    if (boxes[i][j].Text.ToString().Last() == '.') // Если последний символ точка (123.)
+                        boxes[i][j].Text += "0";
+                    if (boxes[i][j].Text.ToString().Length > 8) boxes[i][j].Text = boxes[i][j].Text.ToString().Remove(8);
+                    array[i, j - jstart] = double.Parse(boxes[i][j].Text.Replace(".", ",")); // Double кушает только запятые
                 }
             return array;
         }
 
-        public void Solve(ref RichTextBox box)
+        /// <summary>
+        /// Решает систему и выводит результат
+        /// </summary>
+        /// <returns></returns>
+        public List<string> Solve()
         {
             double[] solution;
             List<string> output = new List<string>();
+            double[,] free = ScanArray(false);
             try
             {
-                Calculator calc = new Calculator(GetArray());
+                calc = new Calculator(ScanArray(true));
+                calc[0] = free[0, 0];
+                calc[1] = free[1, 0];
+                calc[2] = free[2, 0];
                 solution = calc.Solve(); // Запрашиваем решение
 
                 foreach (double num in solution)
@@ -166,21 +184,7 @@ namespace calculator
                 ShowToast(e.Message.ToString(),"Оказия");
                 output = new List<string> { "C1","C2","C3"};
             }
-            // Вывод
-            box.SelectionCharOffset = 0;
-            box.AppendText("X",Color.White);//x1
-            box.AppendText("1",-5, Color.White);
-            box.AppendText(" = "+output[0], Color.White);
-            box.AppendText("\n");
-            box.AppendText("\n",new Font("Verdana", 5.0F, FontStyle.Regular));
-            box.AppendText("X", Color.White);//x2
-            box.AppendText("2", -5, Color.White);
-            box.AppendText(" = " + output[1],Color.White);
-            box.AppendText("\n");
-            box.AppendText("\n", new Font("Verdana", 5.0F, FontStyle.Regular));
-            box.AppendText("X", Color.White);//x3
-            box.AppendText("3", -5, Color.White);
-            box.AppendText(" = " + output[2], Color.White);    
+            return output;   
         }
 
         /// <summary>
@@ -425,6 +429,11 @@ namespace calculator
             }
         }
 
+        /// <summary>
+        /// Выделяет весь текст при нажатии
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectionOnEnter(object sender, System.EventArgs e)
         {
             TextBox box = sender as TextBox;
