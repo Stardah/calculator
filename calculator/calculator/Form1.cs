@@ -10,12 +10,15 @@ using System.Windows.Forms;
 
 namespace calculator
 {
+    /// <summary>
+    /// by Nikita Terlych
+    /// Класс главной формы приложения
+    /// </summary>
     public partial class Form1 : Form
     {
         ControlsManager stuff;
         Wolfram wolf = new Wolfram();
         Point dragOffset;
-
         Point formLeft;
         Point formTop;
 
@@ -51,6 +54,7 @@ namespace calculator
             NativeWinAPI.SetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE, style);
             //
             stuff = new ControlsManager(this.Width, this.Height);
+            stuff.GetCoord(this.Left, this.Top);
             DrawControls(stuff.boxes);
             DrawControls(stuff.labels);
             formLeft = new Point(this.Left, this.Width);
@@ -107,9 +111,9 @@ namespace calculator
                     DrawOneControl(stuff.labels.Last()[i]);
                 }
                 DrawOneControl(stuff.boxes.Last().Last()); // boxes.Count = labels.Count +1
-                stuff.ShowToast("Строка добавлена", "Готово", this.Left, this.Top);
+                stuff.ShowToast("Строка добавлена", "Готово");
             }
-            else stuff.ShowToast("Достигнут предел количества строк", "Оказия", this.Left, this.Top);
+            else stuff.ShowToast("Достигнут предел количества строк", "Оказия");
         }
 
         /// <summary>
@@ -162,14 +166,14 @@ namespace calculator
                 //btnAddRaw.Top -= stuff.gapTop;
                 //btnSolve.Top -= stuff.gapTop;
                 //btnDel.Top -= stuff.gapTop;
-                stuff.ShowToast("Строка удалена", "Готово", this.Left, this.Top);
+                stuff.ShowToast("Строка удалена", "Готово");
             }
-            else stuff.ShowToast("Нельзя удалить первые две строки", "Оказия", this.Left, this.Top);
+            else stuff.ShowToast("Нельзя удалить первые две строки", "Оказия");
         }
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            stuff.GetArray();
+            stuff.Solve(ref RTBSolution);
         }
 
         // Exit button
@@ -197,11 +201,10 @@ namespace calculator
             if (e.Button == MouseButtons.Left)
             {
                 Point newLocation = this.PointToScreen(e.Location);
-
                 newLocation.X -= dragOffset.X;
                 newLocation.Y -= dragOffset.Y;
-
                 FindForm().Location = newLocation;
+                stuff.GetCoord(this.Left, this.Top);
             }
         }
 
@@ -224,6 +227,7 @@ namespace calculator
                 newLocation.X -= dragOffset.X;
                 newLocation.Y -= dragOffset.Y;
                 FindForm().Location = newLocation;
+                stuff.GetCoord(this.Left, this.Top);
             }
         }
 
@@ -256,19 +260,19 @@ namespace calculator
         private void btnWolf_Click(object sender, EventArgs e)
         {
             textWolfResult.Text = wolf.SolveThis(textWoldQuery.Text);
-            if (textWolfResult.Text != "") stuff.ShowToast("Значение получено", "Готово", this.Left, this.Top);
-            else stuff.ShowToast("Не удалось найти значение выражения", "Оказия", this.Left, this.Top);
+            if (textWolfResult.Text != "") stuff.ShowToast("Значение получено", "Готово");
+            else stuff.ShowToast("Не удалось найти значение выражения", "Оказия");
         }
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            stuff.ShowToast("Решайте системы линейных уравнений!", "Здравствуйте!", this.Left, this.Top);
+            stuff.ShowToast("Решайте системы линейных уравнений!", "Здравствуйте!");
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
             stuff.Clear();
-            stuff.ShowToast("Значения индексов обнулены", "Готово", this.Left, this.Top);
+            stuff.ShowToast("Значения индексов обнулены", "Готово");
         }
     }
 }

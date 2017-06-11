@@ -81,32 +81,12 @@ namespace calculator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap deleteAll {
-            get {
-                object obj = ResourceManager.GetObject("deleteAll", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Exo2 {
             get {
                 object obj = ResourceManager.GetObject("Exo2", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap GrayTriangles {
-            get {
-                object obj = ResourceManager.GetObject("GrayTriangles", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -186,26 +166,6 @@ namespace calculator.Properties {
         internal static System.Drawing.Bitmap RoundedButtonLight {
             get {
                 object obj = ResourceManager.GetObject("RoundedButtonLight", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap trash {
-            get {
-                object obj = ResourceManager.GetObject("trash", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap trash2 {
-            get {
-                object obj = ResourceManager.GetObject("trash2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

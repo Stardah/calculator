@@ -9,32 +9,76 @@ using System.Windows.Forms;
 
 namespace calculator
 {
+    /// <summary>
+    /// by Nikita Terlych
+    /// Класс работы с контролами
+    /// </summary>
     class ControlsManager
     {
+        // Костыль для удобства юзания тостов
+        int formLeft = 0;
+        int formTop = 0;
         // Const
         int toastTopMargin = 150; // Сдвиг относительно низа формы 
         int toastLeftMargin = 130; // Сдвиг относительно центра формы 
         // Var
-        public int formWidth;
-        public int formHeight;
+        int formWidth;
+        int formHeight;
         // Fonts1
         Font textFont = new Font("Verdana", 10.0F, FontStyle.Regular);
         Font labelFont = new Font("Italic", 9.75F, FontStyle.Regular);
         // Sizes of Controls
-        Size labelSize = new Size(28, 19); 
+        Size labelSize = new Size(28, 19);
         Size boxSize = new Size(38, 23);
         // Gapses between Controls
-        public int gapLeft = 38;
-        public int gapTop = 38;
+        public int gapLeft
+        {
+            get
+            {
+                return 38;
+            }
+        }
+        public int gapTop
+        {
+            get
+            {
+                return 38;
+            }
+        }
         // Control's lists
-        public List<List<TextBox>> boxes = new List<List<TextBox>>();
-        public List<List<RichTextBox>> labels = new List<List<RichTextBox>>();
-        public List<Toast> toasts = new List<Toast>();
+        public List<List<TextBox>> boxes;
+        public List<List<TextBox>> Boxes
+        {
+            get
+            {
+                return boxes;
+            }
+            set
+            {
+                if (value is List<List<TextBox>>)
+                    boxes = value;
+            }
+        }
+        public List<List<RichTextBox>> labels;
+        public List<List<RichTextBox>> Labels
+        {
+            get
+            {
+                return labels;
+            }
+            set
+            {
+                if (value is List<List<RichTextBox>>)
+                    labels = value;
+            }
+        }
+        private List<Toast> toasts = new List<Toast>();
         // Constructors
         public ControlsManager(int width, int height)
         {
             this.formWidth = width;
             this.formHeight = height;
+            Initialize();
             StartUp();
         }
 
@@ -43,7 +87,15 @@ namespace calculator
             this.formWidth = width;
             this.formHeight = height;
             labelFont = font;
+            Initialize();
             StartUp();
+        }
+
+        private void Initialize()
+        {
+            boxes = new List<List<TextBox>>();
+            labels = new List<List<RichTextBox>>();
+            toasts = new List<Toast>();
         }
 
         /// <summary>
@@ -79,7 +131,7 @@ namespace calculator
         /// </summary>
         /// <param name="list"></param>
         /// <returns>double[,]</returns>
-        public double[,] ScanArray(List<List<TextBox>> list)
+        private double[,] ScanArray(List<List<TextBox>> list)
         {
             double[,] array = new double[list.Count, list.Last().Count];
             for (int i = 0; i < list.Count; i++)
@@ -97,17 +149,64 @@ namespace calculator
             return array;
         }
 
-        /// <summary>
-        /// Выводит Toast
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="info"></param>
-        public void ShowToast(string text, string info, int left, int top)
+        public void Solve(ref RichTextBox box)
         {
-            toasts.Add(new Toast(text, info));
+            double[] solution;
+            List<string> output = new List<string>();
+            try
+            {
+                Calculator calc = new Calculator(GetArray());
+                solution = calc.Solve(); // Запрашиваем решение
+
+                foreach (double num in solution)
+                    output.Add(num.ToString());
+            }
+            catch (Exception e)
+            {
+                ShowToast(e.Message.ToString(),"Оказия");
+                output = new List<string> { "C1","C2","C3"};
+            }
+                // Вывод
+            box.AppendText("X1 =" + output[0], Color.Red);
+            box.AppendText(" ");
+            box.AppendText("X2 ="+ output[1].ToString(), Color.Green);
+            box.AppendText(": ");
+            box.AppendText("X3 =" + output[2].ToString(), Color.Blue);
+            box.AppendText(Environment.NewLine);
+        }
+
+        /// <summary>
+        /// Выводит уведомление
+        /// </summary>
+        /// <param name="text">Основной текст</param>
+        /// <param name="header">Заголовок</param>
+        /// <param name="left">Form.Left</param>
+        /// <param name="top">Form.Top</param>
+        public void ShowToast(string text, string header, int left, int top)
+        {
+            toasts.Add(new Toast(text, header));
             toasts.Last().Left = left + formWidth/2 - toasts.Last().Width / 2 + toastLeftMargin;
             toasts.Last().Top = top + formHeight - toastTopMargin;
             toasts.Last().Show();
+        }
+
+        public void ShowToast(string text, string info)
+        {
+            toasts.Add(new Toast(text, info));
+            toasts.Last().Left = formLeft + formWidth / 2 - toasts.Last().Width / 2 + toastLeftMargin;
+            toasts.Last().Top = formTop + formHeight - toastTopMargin;
+            toasts.Last().Show();
+        }
+
+        /// <summary>
+        /// Принимает координаты формы
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="top"></param>
+        public void GetCoord(int left, int top)
+        {
+            this.formLeft = left;
+            this.formTop = top;
         }
 
         /// <summary>
@@ -174,7 +273,7 @@ namespace calculator
         /// <summary>
         /// Составляет начальную таблицу
         /// </summary>
-        public void StartUp()
+        private void StartUp()
         {
             List<TextBox> rowBox;
             List<RichTextBox> rowLabel;
@@ -212,7 +311,7 @@ namespace calculator
         /// Clone boxes list (List<TextBox>)
         /// </summary>
         /// <returns>List<TextBox></returns>
-        public List<TextBox> CloneBoxes()
+        private List<TextBox> CloneBoxes()
         {
             List<TextBox> newBoxes = new List<TextBox>();
             TextBox newbox;
@@ -228,7 +327,7 @@ namespace calculator
         /// Clone labels list (List<Labels>)
         /// </summary>
         /// <returns>List<Label></returns>
-        public List<RichTextBox> CloneLabels()
+        private List<RichTextBox> CloneLabels()
         {
             List<RichTextBox> newLabels = new List<RichTextBox>();
             RichTextBox newlabel;
@@ -267,7 +366,7 @@ namespace calculator
         /// <param name="left"></param>
         /// <param name="top"></param>
         /// <returns>Label</returns>
-        public RichTextBox AddLabel(int left, int top, string info)
+        private RichTextBox AddLabel(int left, int top, string info)
         {
             RichTextBox richTextBox = new RichTextBox();
             richTextBox.Font = labelFont;
@@ -289,7 +388,7 @@ namespace calculator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void RTBFocus(Object sender, EventArgs e)
+        private void RTBFocus(Object sender, EventArgs e)
         {
             RichTextBox rtb = sender as RichTextBox;
             int j = (rtb.Top - labels.First().First().Top)/gapTop;
@@ -302,7 +401,7 @@ namespace calculator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void KeyHandler(object sender, KeyPressEventArgs e)
+        private void KeyHandler(object sender, KeyPressEventArgs e)
         {
             TextBox box = sender as TextBox;
             if (e.KeyChar == ',') e.KeyChar = '.';

@@ -6,7 +6,8 @@ using System.Xaml;
 namespace calculator
 {
     /// <summary>
-    /// Interaction logic for Toast.xaml
+    /// by Nikita Terlych
+    /// Класс уведомлений
     /// </summary>
     public partial class Toast : Window
     {

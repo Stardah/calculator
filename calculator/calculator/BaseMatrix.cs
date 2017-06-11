@@ -15,8 +15,8 @@ namespace calculator
 
             m_matrixSize = matrixSize;
 
-            if (coeffs.Length != m_matrixSize * m_matrixSize)
-                throw new ArgumentException("Некорректное количество элементов матрицы.");
+            //if (coeffs.Length != m_matrixSize * m_matrixSize)
+            //    throw new ArgumentException("Некорректное количество элементов матрицы.");
 
             m = new double[m_matrixSize, m_matrixSize];
 
@@ -28,10 +28,10 @@ namespace calculator
 
         public BaseMatrix(double[,] matrix)
         {
-            if (matrix.Length != m_matrixSize * m_matrixSize)
-                throw new ArgumentException("Некорректное количество элементов матрицы.");
-
-            matrix.CopyTo(m, 0);
+            //if (matrix.Length != m_matrixSize * m_matrixSize)
+            //    throw new ArgumentException("Некорректное количество элементов матрицы.");
+            m_matrixSize = 3;
+            m = matrix;
         }
 
         public static BaseMatrix Copy(BaseMatrix matrix)
@@ -120,6 +120,6 @@ namespace calculator
         public int Size { get { return m_matrixSize; } }
 
         protected int m_matrixSize;
-        protected double[,] m;
+        protected double[,] m = new double[3,3];
     }
 }
