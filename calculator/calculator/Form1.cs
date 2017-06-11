@@ -173,7 +173,12 @@ namespace calculator
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            stuff.Solve(ref RTBSolution);
+            //stuff.Solve(ref Label);
+        }
+
+        public void Draw()
+        {
+
         }
 
         // Exit button
@@ -273,6 +278,11 @@ namespace calculator
         {
             stuff.Clear();
             stuff.ShowToast("Значения индексов обнулены", "Готово");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Draw();
         }
     }
 }

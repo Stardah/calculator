@@ -93,12 +93,6 @@ namespace calculator
             return x;
         }
 
-        public string Whatsup()
-        {
-
-            return "Пока что ничего не решено";
-        }
-
         /// <summary>
         /// 
         /// </summary>

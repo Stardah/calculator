@@ -166,13 +166,21 @@ namespace calculator
                 ShowToast(e.Message.ToString(),"Оказия");
                 output = new List<string> { "C1","C2","C3"};
             }
-                // Вывод
-            box.AppendText("X1 =" + output[0], Color.Red);
-            box.AppendText(" ");
-            box.AppendText("X2 ="+ output[1].ToString(), Color.Green);
-            box.AppendText(": ");
-            box.AppendText("X3 =" + output[2].ToString(), Color.Blue);
-            box.AppendText(Environment.NewLine);
+            // Вывод
+            box.SelectionCharOffset = 0;
+            box.AppendText("X",Color.White);//x1
+            box.AppendText("1",-5, Color.White);
+            box.AppendText(" = "+output[0], Color.White);
+            box.AppendText("\n");
+            box.AppendText("\n",new Font("Verdana", 5.0F, FontStyle.Regular));
+            box.AppendText("X", Color.White);//x2
+            box.AppendText("2", -5, Color.White);
+            box.AppendText(" = " + output[1],Color.White);
+            box.AppendText("\n");
+            box.AppendText("\n", new Font("Verdana", 5.0F, FontStyle.Regular));
+            box.AppendText("X", Color.White);//x3
+            box.AppendText("3", -5, Color.White);
+            box.AppendText(" = " + output[2], Color.White);    
         }
 
         /// <summary>
@@ -264,7 +272,7 @@ namespace calculator
                 labels[i].Last().Text = "X" + labels[i].Count.ToString() + "+"; // Fix last label's Text
                 left = boxes[i].Last().Left + gapLeft;  // Define left for label
                 top = labels[i].Last().Top;             // Define top position of label
-                labels[i].Add(AddLabel(left, top, "X" + (labels[i].Count + 1).ToString() + "=")); // Add new label to list
+                labels[i].Add(AddRichTextBox(left, top, "X" + (labels[i].Count + 1).ToString() + "=")); // Add new label to list
                 top = boxes[i].Last().Top + 3;            // Define top position of textBox
                 boxes[i].Add(AddBox(left + labels[i].Last().Size.Width, top)); // Add new TextBox to list
             }
@@ -288,7 +296,7 @@ namespace calculator
                 for (int i = 0; i < 3; i++)
                 {
                     rowBox.Add(AddBox(left, j * gapTop + top));
-                    label = AddLabel(left + gapLeft, j * gapTop + top, "X");
+                    label = AddRichTextBox(left + gapLeft, j * gapTop + top, "X");
                     // Оффсет дли индекса
                     label.SelectionCharOffset = -5;
                     // Собственно индекс	
@@ -333,7 +341,7 @@ namespace calculator
             RichTextBox newlabel;
             foreach (RichTextBox label in labels.Last())
             {
-                newlabel = AddLabel(label.Left, label.Top, label.Text);
+                newlabel = AddRichTextBox(label.Left, label.Top, label.Text);
                 newLabels.Add(newlabel);
             }
             return newLabels;
@@ -354,6 +362,7 @@ namespace calculator
             textBox.Left = left;
             textBox.Text = "0";
             textBox.KeyPress += KeyHandler;
+            textBox.Click += SelectionOnEnter;
             textBox.BorderStyle = BorderStyle.FixedSingle;
             textBox.TextAlign = HorizontalAlignment.Center;
             textBox.PreviewKeyDown += new PreviewKeyDownEventHandler(BoxPreviewKeyDown);
@@ -361,12 +370,13 @@ namespace calculator
         }
 
         /// <summary>
-        /// Создаёт новый Label
+        /// Создаёт новый RichTextBox
         /// </summary>
         /// <param name="left"></param>
         /// <param name="top"></param>
+        /// <param name="info"></param>
         /// <returns>Label</returns>
-        private RichTextBox AddLabel(int left, int top, string info)
+        private RichTextBox AddRichTextBox(int left, int top, string info)
         {
             RichTextBox richTextBox = new RichTextBox();
             richTextBox.Font = labelFont;
@@ -412,6 +422,16 @@ namespace calculator
                     e.Handled = true;
                 // Воод не более 8 символов
                 if (box.Text.ToString().Length > 8) e.Handled = true;
+            }
+        }
+
+        private void SelectionOnEnter(object sender, System.EventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (!String.IsNullOrEmpty(box.Text))
+            {
+                box.SelectionStart = 0;
+                box.SelectionLength = box.Text.Length;
             }
         }
 
