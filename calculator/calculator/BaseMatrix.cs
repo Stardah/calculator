@@ -8,6 +8,16 @@ namespace calculator
 {
     public abstract class BaseMatrix
     {
+        public BaseMatrix(int matrixSize)
+        {
+            if (matrixSize < 1)
+                throw new ArgumentException("Некорректный размер матрицы.");
+
+            m_matrixSize = matrixSize;
+
+            m = new double[m_matrixSize, m_matrixSize];
+        }
+
         public BaseMatrix(int matrixSize, params double[] coeffs)
         {
             if (matrixSize < 1)

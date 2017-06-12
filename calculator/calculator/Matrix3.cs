@@ -8,11 +8,16 @@ namespace calculator
 {
     public class Matrix3 : BaseMatrix
     {
+        public Matrix3() :
+            base(MatrixSize)
+        {
+        }
+
         public Matrix3(params double[] coeffs) :
             base(MatrixSize, coeffs)
         {
         }
-        
+
         public Matrix3(double[,] matrix) :
             base(MatrixSize, matrix)
         {
