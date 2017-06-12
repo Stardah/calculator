@@ -14,7 +14,7 @@ namespace calculator
         }
         
         public Matrix3(double[,] matrix) :
-            base(matrix)
+            base(MatrixSize, matrix)
         {
         }
 

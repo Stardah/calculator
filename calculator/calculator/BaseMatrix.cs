@@ -23,16 +23,21 @@ namespace calculator
             int i = 0;
 
             foreach (var v in coeffs)
-                m[i % m_matrixSize, i / m_matrixSize] = v;
+                m[i % m_matrixSize, i++ / m_matrixSize] = v;
         }
 
-        public BaseMatrix(double[,] matrix)
+        public BaseMatrix(int matrixSize, double[,] matrix)
         {
-            if (matrix.Length != 3 * 3)
+            if (matrix.Length != matrixSize * matrixSize)
                 throw new ArgumentException("Некорректное количество элементов матрицы.");
 
-            m_matrixSize = 3;
-            m = matrix;
+            m_matrixSize = matrixSize;
+
+            m = new double[m_matrixSize, m_matrixSize];
+
+            for (int i = 0; i < m_matrixSize; ++i)
+                for (int j = 0; j < m_matrixSize; ++j)
+                    m[i, j] = matrix[i, j];
         }
 
         public static BaseMatrix Copy(BaseMatrix matrix)
@@ -111,7 +116,7 @@ namespace calculator
             int i = 0;
 
             foreach (var v in m)
-                temp[i / m_matrixSize, i % m_matrixSize] = v;
+                temp[i / m_matrixSize, i++ % m_matrixSize] = v;
 
             m = temp;
 
