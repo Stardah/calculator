@@ -205,16 +205,26 @@ namespace calculator
         private string SystemToString()
         {
             string[] array = new string[boxes.Count];
+            string output = "Solve[{";
             for (int i = 0; i < boxes.Count; i++)
             {
+                if (i != 0) output += ",";
                 for (int j = 0; j < labels.Last().Count; j++)
                 {
                     array[i] += boxes[i][j].Text.Replace(".", ","); // Double кушает только запятые
                     array[i] += "*"+labels[i][j].Text;
                 }
                 array[i] += boxes[i].Last().Text.Replace(".",",");
+                output += array[0];
             }
-            return "Solve[{" + array[0]+","+ "" + array[1] + ","+ "" + array[2] + "},{X1,X2,X3}]";
+            output += "},{";
+            for (int i = 0; i < Labels.Last().Count; i++)
+            {
+                if (i != 0) output += ",";
+                output += "X" + (i+1).ToString();
+            }
+            output += "}]";
+            return output;
         }
 
         /// <summary>
@@ -224,17 +234,19 @@ namespace calculator
         public List<string> Solve()
         {
             CheckInternetConnection();
-            double[] solution;
+            double[] solution = new double[]{0,0,0};
             List<string> output = new List<string>();
             double[,] free = ScanArray(false);
             try
             {
-                calc = new Calculator(ScanArray(true));
-                calc[0] = free[0, 0];
-                calc[1] = free[1, 0];
-                calc[2] = free[2, 0];
-                solution = calc.Solve(); // Запрашиваем решение
-
+                if (boxes.Count == 3)
+                {
+                    calc = new Calculator(ScanArray(true));
+                    calc[0] = free[0, 0];
+                    calc[1] = free[1, 0];
+                    calc[2] = free[2, 0];
+                    solution = calc.Solve(); // Запрашиваем решение
+                }
                 if (solution[0] + solution[1] + solution[2] != 0)
                 {
                     foreach (double num in solution)
@@ -242,7 +254,8 @@ namespace calculator
                 }
                 else
                 {
-                    string input = ""+SystemToString();//[//math:${input1}//],[//math:${input2}//],[//math:${input3}//]
+                    string input = ""+SystemToString();
+                    MessageBox.Show(input, "");
                     List<string> text = wolf.SolveSystem(input);
                     if (text[0] != "C1")
                         output = text;

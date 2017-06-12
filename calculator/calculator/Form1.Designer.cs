@@ -78,17 +78,18 @@
             this.btnAddRaw.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddRaw.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAddRaw.ForeColor = System.Drawing.Color.White;
-            this.btnAddRaw.Location = new System.Drawing.Point(81, 224);
+            this.btnAddRaw.Location = new System.Drawing.Point(50, 168);
             this.btnAddRaw.Name = "btnAddRaw";
             this.btnAddRaw.Size = new System.Drawing.Size(32, 32);
             this.btnAddRaw.TabIndex = 1;
             this.btnAddRaw.UseVisualStyleBackColor = false;
+            this.btnAddRaw.Visible = false;
             this.btnAddRaw.Click += new System.EventHandler(this.btnAddRow_Click);
             // 
             // btnSolve
             // 
             this.btnSolve.BackColor = System.Drawing.Color.Transparent;
-            this.btnSolve.BackgroundImage = global::calculator.Properties.Resources.RoundedButton2;
+            this.btnSolve.BackgroundImage = global::calculator.Properties.Resources.RoundedButton;
             this.btnSolve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSolve.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnSolve.FlatAppearance.BorderSize = 0;
@@ -97,9 +98,9 @@
             this.btnSolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSolve.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSolve.ForeColor = System.Drawing.Color.White;
-            this.btnSolve.Location = new System.Drawing.Point(119, 224);
+            this.btnSolve.Location = new System.Drawing.Point(50, 201);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(149, 32);
+            this.btnSolve.Size = new System.Drawing.Size(218, 32);
             this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "Решить";
             this.btnSolve.UseVisualStyleBackColor = false;
@@ -129,7 +130,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(321, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(265, 268);
+            this.panel1.Size = new System.Drawing.Size(265, 248);
             this.panel1.TabIndex = 3;
             // 
             // out3
@@ -333,11 +334,12 @@
             this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnDel.ForeColor = System.Drawing.Color.White;
-            this.btnDel.Location = new System.Drawing.Point(43, 224);
+            this.btnDel.Location = new System.Drawing.Point(12, 168);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(32, 32);
             this.btnDel.TabIndex = 6;
             this.btnDel.UseVisualStyleBackColor = false;
+            this.btnDel.Visible = false;
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // textWoldQuery
@@ -388,7 +390,7 @@
             this.panel3.Controls.Add(this.textWolfResult);
             this.panel3.Controls.Add(this.textWoldQuery);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 295);
+            this.panel3.Location = new System.Drawing.Point(0, 275);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(586, 95);
             this.panel3.TabIndex = 9;
@@ -456,7 +458,7 @@
             this.panelSystem.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSystem.Location = new System.Drawing.Point(0, 27);
             this.panelSystem.Name = "panelSystem";
-            this.panelSystem.Size = new System.Drawing.Size(321, 268);
+            this.panelSystem.Size = new System.Drawing.Size(321, 248);
             this.panelSystem.TabIndex = 11;
             // 
             // btnClear
@@ -490,7 +492,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::calculator.Properties.Resources.LightTriangles;
-            this.ClientSize = new System.Drawing.Size(586, 390);
+            this.ClientSize = new System.Drawing.Size(586, 370);
             this.Controls.Add(this.panelSystem);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
