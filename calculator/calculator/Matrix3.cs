@@ -14,7 +14,7 @@ namespace calculator
         }
         
         public Matrix3(double[,] matrix) :
-            base(matrix)
+            base(MatrixSize, matrix)
         {
         }
 
@@ -48,7 +48,9 @@ namespace calculator
                 for (int j = 0; j < MatrixSize; ++j)
                     minorsSigned.Add(Minor(i, j) * (((i + j) & 1) == 1 ? -1 : 1));
 
-            m = (double[,])(new Matrix3(minorsSigned.ToArray()).Transpone() / det);
+            var matr = new Matrix3(minorsSigned.ToArray()).Transpone();
+
+            m = (double[,])(matr / det);
             
             return this;
         }
