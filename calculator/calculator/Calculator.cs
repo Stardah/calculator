@@ -121,7 +121,7 @@ namespace calculator
         /// <param name="index">Индекс системы.</param>
         /// <returns>Массив с системой уравнений по заданному индексу.</returns>
         /// <exception cref="IndexOutOfRangeException"></exception>
-        public string GetSystemStringFromMemory(int index)
+        public string[] GetSystemStringsFromMemory(int index)
         {
             if (index < 0 || index > MemoryCount || MemoryCount == 0)
                 throw new IndexOutOfRangeException("Нет такого уравнения.");
@@ -133,7 +133,11 @@ namespace calculator
             for (int i = 0; i < EquationNumber; ++i)
                 sb.AppendFormat("x{0} = {1}; ", i + 1, tuple.Item3[i]);
 
-            return sb.ToString(); 
+            return (
+                from v in sb.ToString().Split('\n', '\r')
+                where v.Length > 0
+                select v
+                ).ToArray(); 
         }
 
         /// <summary>
