@@ -20,6 +20,10 @@ namespace calculator
             Clear();
         }
 
+        /// <summary>
+        /// Конструктор из массива double.
+        /// </summary>
+        /// <param name="array">Массив double, представляющий матрицу коэффициентов.</param>
         public Calculator(double[,] array)
         {
             SetMatrix(array);
@@ -51,7 +55,7 @@ namespace calculator
         /// <param name="variableIndex">Индекс переменной.</param>
         /// <param name="equationIndex">Индекс уравнения.</param>
         /// <returns>Коэффициент перед переменной.</returns>
-        public double this[int variableIndex, int equationIndex]
+        public double this[int equationIndex, int variableIndex]
         {
             get
             {
@@ -64,6 +68,19 @@ namespace calculator
         }
 
         /// <summary>
+        /// Удалить систему из память.
+        /// </summary>
+        /// <param name="index">Индекс удаляемой системы.</param>
+        /// <exception cref="IndexOutOfRangeException"></exception>
+        public void DeleteSystemFromMemory(int index)
+        {
+            if (index < 0 || index > MemoryCount || MemoryCount == 0)
+                throw new IndexOutOfRangeException("Нет такого уравнения.");
+
+            m_memory.RemoveAt(index);
+        }
+
+        /// <summary>
         /// Очистить калькулятор от всех значений.
         /// </summary>
         public void Clear()
@@ -71,11 +88,67 @@ namespace calculator
             m_matrix = new Matrix3();
         }
 
+        /// <summary>
+        /// Достать систему из памяти.
+        /// </summary>
+        /// <param name="index">Индекс системы.</param>
+        /// <returns>Массив с системой уравнений по заданному индексу.</returns>
+        /// <exception cref="IndexOutOfRangeException"></exception>
+        public double[,] GetSystemFromMemory(int index)
+        {
+            if (index < 0 || index > MemoryCount || MemoryCount == 0)
+                throw new IndexOutOfRangeException("Нет такого уравнения.");
+
+            var tuple = m_memory[index];
+            var matr = new double[EquationNumber + 2, EquationNumber];
+
+            for (int i = 0; i < EquationNumber; ++i)
+                for (int j = 0; j < EquationNumber; ++j)
+                    matr[i, j] = tuple.Item1[i, j];
+
+            for (int i = 0; i < EquationNumber; ++i)
+                matr[EquationNumber + 1, i] = tuple.Item2[i];
+
+            for (int i = 0; i < EquationNumber; ++i)
+                matr[EquationNumber + 2, i] = tuple.Item3[i];
+
+            return matr;
+        }
+
+        /// <summary>
+        /// Достать систему из памяти и превратить в строку.
+        /// </summary>
+        /// <param name="index">Индекс системы.</param>
+        /// <returns>Массив с системой уравнений по заданному индексу.</returns>
+        /// <exception cref="IndexOutOfRangeException"></exception>
+        public string GetSystemStringFromMemory(int index)
+        {
+            if (index < 0 || index > MemoryCount || MemoryCount == 0)
+                throw new IndexOutOfRangeException("Нет такого уравнения.");
+
+            var tuple = m_memory[index];
+
+            StringBuilder sb = new StringBuilder(tuple.Item1.ToStringWithFree(tuple.Item2));
+
+            for (int i = 0; i < EquationNumber; ++i)
+                sb.AppendFormat("x{0} = {1}; ", i + 1, tuple.Item3[i]);
+
+            return sb.ToString(); 
+        }
+
+        /// <summary>
+        /// Установить матрицу коэффициентов.
+        /// </summary>
+        /// <param name="coeffs">Коэффициенты.</param>
         public void SetMatrix(double[,] coeffs)
         {
             m_matrix = new Matrix3(coeffs);
         }
 
+        /// <summary>
+        /// Установить матрицу-столбец свободных членов.
+        /// </summary>
+        /// <param name="free">Матрица-столбец свободных членов.</param>
         public void SetFree(params double[] free)
         {
             if (free.Length != EquationNumber)
@@ -110,10 +183,18 @@ namespace calculator
             x[1] = inv[1, 0] * freeCoeffs[0] + inv[1, 1] * freeCoeffs[1] + inv[1, 2] * freeCoeffs[2];
             x[2] = inv[2, 0] * freeCoeffs[0] + inv[2, 1] * freeCoeffs[1] + inv[2, 2] * freeCoeffs[2];
 
+            m_memory.Add(new Tuple<Matrix3, double[], double[]>(
+                (Matrix3)BaseMatrix.Copy(m_matrix),
+                (double[])m_free.Clone(),
+                (double[])x.Clone()
+            ));
+
             return x;
         }
 
         private const int EquationNumber = 3;
+
+        public int MemoryCount { get { return m_memory.Count; } }
 
         /// <summary>
         /// Список уравнений.
@@ -124,5 +205,11 @@ namespace calculator
         /// Список свободных членов.
         /// </summary>
         private double[] m_free = new double[EquationNumber];
+
+        /// <summary>
+        /// Массив, хранящий историю решений.
+        /// </summary>
+        private List<Tuple<Matrix3, double[], double[]>> m_memory = 
+            new List<Tuple<Matrix3, double[], double[]>>();
     }
 }

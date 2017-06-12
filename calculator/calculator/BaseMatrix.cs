@@ -123,6 +123,50 @@ namespace calculator
             return this;
         }
 
+        public string ToStringWithFree(params double[] free)
+        {
+            bool areThereFree = free.Length < m_matrixSize;
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < m_matrixSize; ++i)
+            {
+                bool first = true;
+                for (int j = 0; j < m_matrixSize; ++j)
+                {
+                    var temp = m[i, j];
+
+                    if (temp < 0.0)
+                    {
+                        if (first)
+                            sb.AppendFormat("{0} * x{1}", temp, (j + 1));
+                        else
+                            sb.AppendFormat(" + ({0}) * x{1}", temp, (j + 1));
+                    }
+                    else
+                    {
+                        if (first)
+                            sb.AppendFormat("{0} * x{1}", temp, (j + 1));
+                        else
+                            sb.AppendFormat(" + {0} * x{1}", temp, (j + 1));
+                    }
+
+                    first = false;
+                }
+                if (areThereFree)
+                    sb.AppendFormat(" = {0};\n\r", free[i]);
+                else
+                    sb.Append("\n\r");
+            }
+
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            return ToStringWithFree();
+        }
+
         public int Size { get { return m_matrixSize; } }
 
         protected int m_matrixSize;
