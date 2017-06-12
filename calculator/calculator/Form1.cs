@@ -318,6 +318,13 @@ namespace calculator
         {
             panelExpand.Visible = !panelExpand.Visible;
             stuff.PreviewExpand(ref panelExpand);
+            //MessageBox.Show(stuff.labelsPrev.Last().Text,"");
+        }
+
+        private void panelExpand_MouseClick(object sender, MouseEventArgs e)
+        {
+            Panel panel = sender as Panel;
+            panel.Visible = false;
         }
     }
 }

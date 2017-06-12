@@ -85,8 +85,10 @@ namespace calculator
             }
         }
         private List<Toast> toasts;
+        public List<Label> labelsPrev = new List<Label>();
+        Panel panelExpand;
         // Calculator itself
-        Calculator calc;
+        Calculator calc = new Calculator();
         Wolfram wolf = new Wolfram();
         // Constructors
         public ControlsManager(int width, int height)
@@ -241,7 +243,7 @@ namespace calculator
             {
                 if (boxes.Count == 3)
                 {
-                    calc = new Calculator(ScanArray(true));
+                    calc.SetMatrix(ScanArray(true));
                     calc[0] = free[0, 0];
                     calc[1] = free[1, 0];
                     calc[2] = free[2, 0];
@@ -403,28 +405,45 @@ namespace calculator
         public void PreviewExpand(ref Panel panel)
         {
             Label label;
-            calc = new Calculator();
             string[] add;
+            panelExpand = panel;
             int j;
             for (int i = 0; i < calc.MemoryCount; i++) 
             {
                 label = new Label();
-                label.Font = new Font(labelFont.Name, 14f, FontStyle.Regular);
+                label.Font = new Font(labelFont.Name, 12f, FontStyle.Regular);
                 label.ForeColor = Color.White;
+                label.AutoSize = true;
                 label.BorderStyle = BorderStyle.None;
-                panel.Controls.Add(label);
                 label.BackColor = Color.Transparent;
+                label.Click += LabelExpandClick;          
                 add = calc.GetSystemStringsFromMemory(i);
-                j = 1;
+                label.Top = (i * add.Length) * 30;
+                label.Left = 10;
+                j = 0;
+                label.Text = "    Система " + i.ToString()+":"+ Environment.NewLine;
                 foreach (string s in add)
                 {
-                    label.Text = i.ToString() + "x + 131 y + 43 z = 90" + Environment.NewLine;
-                    label.Top = i * 30;
+                    if (j == add.Length - 1)
+                    {
+                        string ss = s.Replace("x2", Environment.NewLine + "x2");
+                        label.Text += ss.Replace("x3", Environment.NewLine + "x3") + Environment.NewLine;
+                    }
+                    else
+                        label.Text += s + " = 0" + Environment.NewLine;
                     j++;
                 }
-                 
+                labelsPrev.Add(label);
+                panel.Controls.Add(labelsPrev.Last());
             }
+        }
 
+        void ReturnPreviousMatrix(double[,] matrix)
+        {
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 4; j++)
+                    boxes[i][j].Text = matrix[j, i].ToString();
+            ShowToast("Система уравнений загружена","Загружено!");
         }
 
         /// <summary>
@@ -435,7 +454,7 @@ namespace calculator
             List<TextBox> rowBox;
             List<RichTextBox> rowLabel;
             int left;
-            int top = 70;
+            int top = 30;
             RichTextBox label;
             for (int j = 0; j < 3; j++)
             {
@@ -595,6 +614,13 @@ namespace calculator
                 box.SelectionStart = 0;
                 box.SelectionLength = box.Text.Length;
             }
+        }
+
+        private void LabelExpandClick(object sender, EventArgs e)
+        {
+            Label label = sender as Label;
+            panelExpand.Visible = false;
+            ReturnPreviousMatrix(calc.GetSystemFromMemory(labelsPrev.IndexOf(label)));
         }
 
         /// <summary>

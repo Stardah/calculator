@@ -29,7 +29,6 @@ namespace calculator
             SetMatrix(array);
         }
 
-
         /// <summary>
         /// Индексатор по свободным членам.
         /// </summary>
@@ -107,10 +106,10 @@ namespace calculator
                     matr[i, j] = tuple.Item1[i, j];
 
             for (int i = 0; i < EquationNumber; ++i)
-                matr[EquationNumber + 1, i] = tuple.Item2[i];
+                matr[EquationNumber + 0, i] = tuple.Item2[i];
 
             for (int i = 0; i < EquationNumber; ++i)
-                matr[EquationNumber + 2, i] = tuple.Item3[i];
+                matr[EquationNumber + 1, i] = tuple.Item3[i];
 
             return matr;
         }
