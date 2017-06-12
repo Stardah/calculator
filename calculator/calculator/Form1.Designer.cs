@@ -59,12 +59,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panelSystem = new System.Windows.Forms.Panel();
+            this.panelExpand = new System.Windows.Forms.Panel();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnExpand = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.panelForLabelUp = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panelSystem.SuspendLayout();
+            this.panelForLabelUp.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAddRaw
@@ -78,7 +82,7 @@
             this.btnAddRaw.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddRaw.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAddRaw.ForeColor = System.Drawing.Color.White;
-            this.btnAddRaw.Location = new System.Drawing.Point(50, 168);
+            this.btnAddRaw.Location = new System.Drawing.Point(12, 149);
             this.btnAddRaw.Name = "btnAddRaw";
             this.btnAddRaw.Size = new System.Drawing.Size(32, 32);
             this.btnAddRaw.TabIndex = 1;
@@ -89,7 +93,7 @@
             // btnSolve
             // 
             this.btnSolve.BackColor = System.Drawing.Color.Transparent;
-            this.btnSolve.BackgroundImage = global::calculator.Properties.Resources.RoundedButton;
+            this.btnSolve.BackgroundImage = global::calculator.Properties.Resources.RoundedButton2;
             this.btnSolve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSolve.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnSolve.FlatAppearance.BorderSize = 0;
@@ -98,7 +102,7 @@
             this.btnSolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSolve.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSolve.ForeColor = System.Drawing.Color.White;
-            this.btnSolve.Location = new System.Drawing.Point(50, 201);
+            this.btnSolve.Location = new System.Drawing.Point(50, 185);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(218, 32);
             this.btnSolve.TabIndex = 2;
@@ -130,7 +134,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(321, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(265, 248);
+            this.panel1.Size = new System.Drawing.Size(265, 268);
             this.panel1.TabIndex = 3;
             // 
             // out3
@@ -264,6 +268,7 @@
             this.labelHeader.Font = new System.Drawing.Font("Bell MT", 14.25F, System.Drawing.FontStyle.Bold);
             this.labelHeader.ForeColor = System.Drawing.Color.White;
             this.labelHeader.Image = global::calculator.Properties.Resources.LabelBack;
+            this.labelHeader.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.labelHeader.Location = new System.Drawing.Point(0, 0);
             this.labelHeader.Name = "labelHeader";
             this.labelHeader.Size = new System.Drawing.Size(265, 45);
@@ -334,7 +339,7 @@
             this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnDel.ForeColor = System.Drawing.Color.White;
-            this.btnDel.Location = new System.Drawing.Point(12, 168);
+            this.btnDel.Location = new System.Drawing.Point(12, 107);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(32, 32);
             this.btnDel.TabIndex = 6;
@@ -390,7 +395,7 @@
             this.panel3.Controls.Add(this.textWolfResult);
             this.panel3.Controls.Add(this.textWoldQuery);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 275);
+            this.panel3.Location = new System.Drawing.Point(0, 295);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(586, 95);
             this.panel3.TabIndex = 9;
@@ -433,12 +438,11 @@
             // 
             // label7
             // 
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Dock = System.Windows.Forms.DockStyle.Top;
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label7.Font = new System.Drawing.Font("Bell MT", 14.25F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Image = global::calculator.Properties.Resources.LabelBack;
             this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
@@ -450,16 +454,26 @@
             // panelSystem
             // 
             this.panelSystem.BackColor = System.Drawing.Color.Transparent;
+            this.panelSystem.Controls.Add(this.panelExpand);
             this.panelSystem.Controls.Add(this.btnClear);
-            this.panelSystem.Controls.Add(this.label7);
             this.panelSystem.Controls.Add(this.btnDel);
             this.panelSystem.Controls.Add(this.btnAddRaw);
             this.panelSystem.Controls.Add(this.btnSolve);
             this.panelSystem.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelSystem.Location = new System.Drawing.Point(0, 27);
+            this.panelSystem.Location = new System.Drawing.Point(0, 72);
             this.panelSystem.Name = "panelSystem";
-            this.panelSystem.Size = new System.Drawing.Size(321, 248);
+            this.panelSystem.Size = new System.Drawing.Size(321, 223);
             this.panelSystem.TabIndex = 11;
+            // 
+            // panelExpand
+            // 
+            this.panelExpand.AutoScroll = true;
+            this.panelExpand.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panelExpand.Location = new System.Drawing.Point(38, 0);
+            this.panelExpand.Name = "panelExpand";
+            this.panelExpand.Size = new System.Drawing.Size(262, 223);
+            this.panelExpand.TabIndex = 12;
+            this.panelExpand.Visible = false;
             // 
             // btnClear
             // 
@@ -480,11 +494,42 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnExpand
+            // 
+            this.btnExpand.BackColor = System.Drawing.Color.Transparent;
+            this.btnExpand.BackgroundImage = global::calculator.Properties.Resources.arrowDown;
+            this.btnExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExpand.FlatAppearance.BorderSize = 0;
+            this.btnExpand.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SkyBlue;
+            this.btnExpand.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
+            this.btnExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExpand.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnExpand.ForeColor = System.Drawing.Color.White;
+            this.btnExpand.Location = new System.Drawing.Point(268, 7);
+            this.btnExpand.Name = "btnExpand";
+            this.btnExpand.Size = new System.Drawing.Size(32, 32);
+            this.btnExpand.TabIndex = 12;
+            this.btnExpand.UseVisualStyleBackColor = false;
+            this.btnExpand.Click += new System.EventHandler(this.btnExpand_Click);
+            // 
             // timer
             // 
             this.timer.Enabled = true;
             this.timer.Interval = 500;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // panelForLabelUp
+            // 
+            this.panelForLabelUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panelForLabelUp.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
+            this.panelForLabelUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelForLabelUp.Controls.Add(this.btnExpand);
+            this.panelForLabelUp.Controls.Add(this.label7);
+            this.panelForLabelUp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelForLabelUp.Location = new System.Drawing.Point(0, 27);
+            this.panelForLabelUp.Name = "panelForLabelUp";
+            this.panelForLabelUp.Size = new System.Drawing.Size(321, 45);
+            this.panelForLabelUp.TabIndex = 13;
             // 
             // Form1
             // 
@@ -492,8 +537,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::calculator.Properties.Resources.LightTriangles;
-            this.ClientSize = new System.Drawing.Size(586, 370);
+            this.ClientSize = new System.Drawing.Size(586, 390);
             this.Controls.Add(this.panelSystem);
+            this.Controls.Add(this.panelForLabelUp);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
@@ -509,6 +555,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panelSystem.ResumeLayout(false);
+            this.panelForLabelUp.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -545,6 +592,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RadioButton btnConnected;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button btnExpand;
+        private System.Windows.Forms.Panel panelForLabelUp;
+        private System.Windows.Forms.Panel panelExpand;
     }
 }
 

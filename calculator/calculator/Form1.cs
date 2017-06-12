@@ -309,14 +309,15 @@ namespace calculator
             rb.Checked = stuff.Connected;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            stuff.ShowToast("Подключение к сети интернет разорвано", "Оказия");
-        }
-
         private void timer_Tick(object sender, EventArgs e)
         {
             stuff.UpdateToasts();
+        }
+
+        private void btnExpand_Click(object sender, EventArgs e)
+        {
+            panelExpand.Visible = !panelExpand.Visible;
+            stuff.PreviewExpand(ref panelExpand);
         }
     }
 }

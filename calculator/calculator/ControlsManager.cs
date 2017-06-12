@@ -400,6 +400,23 @@ namespace calculator
             }
         }
 
+        public void PreviewExpand(ref Panel panel)
+        {
+            Label label;
+            for (int i=0; i<10; i++)
+            {
+                label = new Label();
+                label.Text = i.ToString() + "x + 131 y + 43 z = 90";
+                label.Top = i*30;
+                label.Font = labelFont;
+                label.ForeColor = Color.White;
+                label.BorderStyle = BorderStyle.None;
+                panel.Controls.Add(label);
+                label.BackColor = Color.Transparent;
+            }
+
+        }
+
         /// <summary>
         /// Составляет начальную таблицу
         /// </summary>
