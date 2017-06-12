@@ -17,7 +17,7 @@ namespace calculator
         /// </summary>
         public Calculator()
         {
-            Clear();
+            //Clear();
         }
 
         /// <summary>

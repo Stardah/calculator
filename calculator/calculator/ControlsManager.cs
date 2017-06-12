@@ -405,21 +405,24 @@ namespace calculator
             Label label;
             calc = new Calculator();
             string[] add;
+            int j;
             for (int i = 0; i < calc.MemoryCount; i++) 
             {
                 label = new Label();
-                label.Top = i * 30;
                 label.Font = new Font(labelFont.Name, 14f, FontStyle.Regular);
                 label.ForeColor = Color.White;
                 label.BorderStyle = BorderStyle.None;
                 panel.Controls.Add(label);
                 label.BackColor = Color.Transparent;
-                add = calc.GetSystemStringFromMemory();
+                add = calc.GetSystemStringsFromMemory(i);
+                j = 1;
                 foreach (string s in add)
                 {
                     label.Text = i.ToString() + "x + 131 y + 43 z = 90" + Environment.NewLine;
+                    label.Top = i * 30;
+                    j++;
                 }
-
+                 
             }
 
         }
