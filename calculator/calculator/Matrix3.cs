@@ -22,12 +22,12 @@ namespace calculator
         {
             return
                 m[0, 0] * m[1, 1] * m[2, 2] +
-                m[1, 0] * m[2, 1] * m[0, 2] +
-                m[2, 0] * m[0, 1] * m[1, 2] -
+                m[0, 1] * m[1, 2] * m[2, 0] +
+                m[0, 2] * m[1, 0] * m[2, 1] -
 
-                m[2, 0] * m[1, 1] * m[0, 2] -
-                m[0, 0] * m[2, 1] * m[1, 2] -
-                m[1, 0] * m[0, 1] * m[2, 2];
+                m[0, 2] * m[1, 1] * m[2, 0] -
+                m[0, 0] * m[1, 2] * m[2, 1] -
+                m[0, 1] * m[1, 0] * m[2, 2];
         }
 
         /// <summary>
@@ -55,6 +55,12 @@ namespace calculator
             return this;
         }
 
+        /// <summary>
+        /// Посчитать минор матрицы.
+        /// </summary>
+        /// <param name="x">Координата x минора матрицы.</param>
+        /// <param name="y">Координата y минора матрицы.</param>
+        /// <returns>Число - значение минора матрицы.</returns>
         public override double Minor(int x, int y)
         {
             var list = new List<double>();
