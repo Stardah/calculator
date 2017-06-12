@@ -73,6 +73,9 @@ namespace calculator
             }
         }
         private List<Toast> toasts = new List<Toast>();
+        // Calculator itself
+        Calculator calc;
+        Wolfram wolf = new Wolfram();
         // Constructors
         public ControlsManager(int width, int height)
         {
@@ -121,58 +124,97 @@ namespace calculator
         /// Возвращает массив коэффициентов
         /// </summary>
         /// <returns>double[,]</returns>
-        public double[,] GetArray()
+        public double[,] GetCoeffs()
         {
-            return ScanArray(boxes);
+            return ScanArray(true);
         }
 
         /// <summary>
         /// Переводит список списков TextBox в массив double[,]
         /// </summary>
         /// <param name="list"></param>
+        /// <param name="coeffs">Выводить коэффициенты или свободные члены</param>
         /// <returns>double[,]</returns>
-        private double[,] ScanArray(List<List<TextBox>> list)
+        private double[,] ScanArray(bool coeffs)
         {
-            double[,] array = new double[list.Count, list.Last().Count];
-            for (int i = 0; i < list.Count; i++)
-                for (int j = 0; j < list.Last().Count; j++)
+            int jstart = 0;
+            int jend = 3;
+            if (!coeffs)
+            {
+                jstart = 3;
+                jend = 4;
+            }
+            double[,] array = new double[boxes.Count, jend - jstart];
+            for (int i = 0; i < boxes.Count; i++)
+                for (int j = jstart; j < jend; j++)
                 {
-                    if (list[i][j].Text == "")
-                        list[i][j].Text = "0";
-                    if (list[i][j].Text.ToString().First() == '.') // Если первый символ - точка (.123)
-                        list[i][j].Text = "0"+ list[i][j].Text; 
-                    if (list[i][j].Text.ToString().Last() == '.') // Если последний символ точка (123.)
-                        list[i][j].Text += "0";
-                    if (list[i][j].Text.ToString().Length > 8) list[i][j].Text = list[i][j].Text.ToString().Remove(8);
-                    array[i, j] = double.Parse(list[i][j].Text.Replace(".", ",")); // Double кушает только запятые
+                    if (boxes[i][j].Text == "")
+                        boxes[i][j].Text = "0";
+                    if (boxes[i][j].Text.ToString().First() == '.') // Если первый символ - точка (.123)
+                        boxes[i][j].Text = "0"+ boxes[i][j].Text; 
+                    if (boxes[i][j].Text.ToString().Last() == '.') // Если последний символ точка (123.)
+                        boxes[i][j].Text += "0";
+                    if (boxes[i][j].Text.ToString().Length > 8) boxes[i][j].Text = boxes[i][j].Text.ToString().Remove(8);
+                    array[i, j - jstart] = double.Parse(boxes[i][j].Text.Replace(".", ",")); // Double кушает только запятые
                 }
             return array;
         }
 
-        public void Solve(ref RichTextBox box)
+        private string SystemToString()
+        {
+            string[] array = new string[boxes.Count];
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                for (int j = 0; j < labels.Last().Count; j++)
+                {
+                    array[i] += boxes[i][j].Text.Replace(".", ","); // Double кушает только запятые
+                    array[i] += "*"+labels[i][j].Text;
+                }
+                array[i] += boxes[i].Last().Text.Replace(".",",");
+            }
+            return "Solve[{" + array[0]+","+ "" + array[1] + ","+ "" + array[2] + "},{X1,X2,X3}]";
+        }
+
+        /// <summary>
+        /// Решает систему и выводит результат
+        /// </summary>
+        /// <returns></returns>
+        public List<string> Solve()
         {
             double[] solution;
             List<string> output = new List<string>();
+            double[,] free = ScanArray(false);
             try
             {
-                Calculator calc = new Calculator(GetArray());
+                calc = new Calculator(ScanArray(true));
+                calc[0] = free[0, 0];
+                calc[1] = free[1, 0];
+                calc[2] = free[2, 0];
                 solution = calc.Solve(); // Запрашиваем решение
 
-                foreach (double num in solution)
-                    output.Add(num.ToString());
+                if (solution[0] + solution[1] + solution[2] != 0)
+                {
+                    foreach (double num in solution)
+                        output.Add(num.ToString());
+                }
+                else
+                {
+                    string input = ""+SystemToString();//[//math:${input1}//],[//math:${input2}//],[//math:${input3}//]
+                    MessageBox.Show(input, "Готово");
+                    List<string> text = wolf.SolveSystem(input);
+                    if (text[0] != "C1") ShowToast("Значение получено", "Готово");
+                    else ShowToast("Не удалось найти значение выражения", "Оказия");
+                    MessageBox.Show(text[0]+ text[1]+ text[2], "Готово");
+
+                    output = text;//new List<string> { "C1", "C2", "C3" };
+                }
             }
             catch (Exception e)
             {
                 ShowToast(e.Message.ToString(),"Оказия");
                 output = new List<string> { "C1","C2","C3"};
             }
-                // Вывод
-            box.AppendText("X1 =" + output[0], Color.Red);
-            box.AppendText(" ");
-            box.AppendText("X2 ="+ output[1].ToString(), Color.Green);
-            box.AppendText(": ");
-            box.AppendText("X3 =" + output[2].ToString(), Color.Blue);
-            box.AppendText(Environment.NewLine);
+            return output;   
         }
 
         /// <summary>
@@ -264,7 +306,7 @@ namespace calculator
                 labels[i].Last().Text = "X" + labels[i].Count.ToString() + "+"; // Fix last label's Text
                 left = boxes[i].Last().Left + gapLeft;  // Define left for label
                 top = labels[i].Last().Top;             // Define top position of label
-                labels[i].Add(AddLabel(left, top, "X" + (labels[i].Count + 1).ToString() + "=")); // Add new label to list
+                labels[i].Add(AddRichTextBox(left, top, "X" + (labels[i].Count + 1).ToString() + "=")); // Add new label to list
                 top = boxes[i].Last().Top + 3;            // Define top position of textBox
                 boxes[i].Add(AddBox(left + labels[i].Last().Size.Width, top)); // Add new TextBox to list
             }
@@ -288,7 +330,7 @@ namespace calculator
                 for (int i = 0; i < 3; i++)
                 {
                     rowBox.Add(AddBox(left, j * gapTop + top));
-                    label = AddLabel(left + gapLeft, j * gapTop + top, "X");
+                    label = AddRichTextBox(left + gapLeft, j * gapTop + top, "X");
                     // Оффсет дли индекса
                     label.SelectionCharOffset = -5;
                     // Собственно индекс	
@@ -333,7 +375,7 @@ namespace calculator
             RichTextBox newlabel;
             foreach (RichTextBox label in labels.Last())
             {
-                newlabel = AddLabel(label.Left, label.Top, label.Text);
+                newlabel = AddRichTextBox(label.Left, label.Top, label.Text);
                 newLabels.Add(newlabel);
             }
             return newLabels;
@@ -354,6 +396,7 @@ namespace calculator
             textBox.Left = left;
             textBox.Text = "0";
             textBox.KeyPress += KeyHandler;
+            textBox.Click += SelectionOnEnter;
             textBox.BorderStyle = BorderStyle.FixedSingle;
             textBox.TextAlign = HorizontalAlignment.Center;
             textBox.PreviewKeyDown += new PreviewKeyDownEventHandler(BoxPreviewKeyDown);
@@ -361,12 +404,13 @@ namespace calculator
         }
 
         /// <summary>
-        /// Создаёт новый Label
+        /// Создаёт новый RichTextBox
         /// </summary>
         /// <param name="left"></param>
         /// <param name="top"></param>
+        /// <param name="info"></param>
         /// <returns>Label</returns>
-        private RichTextBox AddLabel(int left, int top, string info)
+        private RichTextBox AddRichTextBox(int left, int top, string info)
         {
             RichTextBox richTextBox = new RichTextBox();
             richTextBox.Font = labelFont;
@@ -412,6 +456,21 @@ namespace calculator
                     e.Handled = true;
                 // Воод не более 8 символов
                 if (box.Text.ToString().Length > 8) e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Выделяет весь текст при нажатии
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectionOnEnter(object sender, System.EventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (!String.IsNullOrEmpty(box.Text))
+            {
+                box.SelectionStart = 0;
+                box.SelectionLength = box.Text.Length;
             }
         }
 

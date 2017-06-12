@@ -12,7 +12,7 @@ namespace calculator
             base(MatrixSize, coeffs)
         {
         }
-
+        
         public Matrix3(double[,] matrix) :
             base(matrix)
         {

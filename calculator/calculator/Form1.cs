@@ -173,7 +173,10 @@ namespace calculator
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            stuff.Solve(ref RTBSolution);
+            List<string> outs = stuff.Solve();
+            out1.Text = outs[0];
+            out2.Text = outs[1];
+            out3.Text = outs[2];
         }
 
         // Exit button

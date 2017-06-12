@@ -28,7 +28,7 @@ namespace calculator
 
         public BaseMatrix(double[,] matrix)
         {
-            if (matrix.Length != m_matrixSize * m_matrixSize)
+            if (matrix.Length != 3 * 3)
                 throw new ArgumentException("Некорректное количество элементов матрицы.");
 
             m_matrixSize = 3;
