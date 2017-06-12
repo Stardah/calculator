@@ -11,6 +11,14 @@ namespace calculator
     /// </summary>
     public partial class Toast : Window
     {
+        bool shown = true;
+        public bool Shown
+        {
+            get
+            {
+                return shown;
+            }
+        }
         /// <summary>
         /// Выкатывает тост с заданным текстом и заголовком
         /// </summary>
@@ -21,6 +29,20 @@ namespace calculator
             InitializeComponent();
             this.info.Text = header;
             this.text.Text = text;
+            this.Show();
+            StartCloseTimer();
+        }
+
+        public Toast(string text, string header, int left, int top)
+        {
+            InitializeComponent();
+            this.info.Text = header;
+            this.text.Text = text;
+            this.Left = left - this.Width/2;
+            this.Top = top;
+            this.Activate();
+            this.Show();
+            this.Topmost = true;
             StartCloseTimer();
         }
 
@@ -30,7 +52,7 @@ namespace calculator
         private void StartCloseTimer()
         {
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(4d);
+            timer.Interval = TimeSpan.FromSeconds(3d);
             timer.Tick += TimerTick;
             timer.Start();
         }
@@ -43,6 +65,7 @@ namespace calculator
             DispatcherTimer timer = (DispatcherTimer)sender;
             timer.Stop();
             timer.Tick -= TimerTick;
+            shown = false;
             Close();
         }
 

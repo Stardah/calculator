@@ -90,6 +90,13 @@ namespace calculator
             panel3.MouseDown += panelMouseDown;
             panelSystem.MouseMove += panelMouseMove;
             panelSystem.MouseDown += panelMouseDown;
+
+            ShowInternetStatus();
+        }
+
+        public void ShowInternetStatus()
+        {
+            btnConnected.Checked = stuff.Connected;
         }
 
         public void CloseForms()
@@ -177,6 +184,7 @@ namespace calculator
             out1.Text = outs[0];
             out2.Text = outs[1];
             out3.Text = outs[2];
+            ShowInternetStatus();
         }
 
         // Exit button
@@ -276,6 +284,39 @@ namespace calculator
         {
             stuff.Clear();
             stuff.ShowToast("Значения индексов обнулены", "Готово");
+        }
+
+        private void btnConnected_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+            if (rb.Checked)
+            {
+                rb.ForeColor = Color.LimeGreen;
+                rb.Text = "Connected";
+                stuff.ShowToast("Есть подключение к сети интернет!", "Отлично!");
+            }
+            else
+            {
+                rb.ForeColor = Color.MediumPurple;
+                rb.Text = "No connection";
+                stuff.ShowToast("Подключение к сети интернет разорвано", "Оказия");
+            }
+        }
+
+        private void btnConnected_Click(object sender, EventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+            rb.Checked = stuff.Connected;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            stuff.ShowToast("Подключение к сети интернет разорвано", "Оказия");
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            stuff.UpdateToasts();
         }
     }
 }

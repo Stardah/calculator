@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace calculator
 {
@@ -24,6 +26,16 @@ namespace calculator
         // Var
         int formWidth;
         int formHeight;
+        // Triggers
+        static bool connected;
+        public bool Connected
+        {
+            get
+            {
+                CheckInternetConnection();
+                return connected;
+            }
+        }
         // Fonts1
         Font textFont = new Font("Verdana", 10.0F, FontStyle.Regular);
         Font labelFont = new Font("Italic", 9.75F, FontStyle.Regular);
@@ -72,7 +84,7 @@ namespace calculator
                     labels = value;
             }
         }
-        private List<Toast> toasts = new List<Toast>();
+        private List<Toast> toasts;
         // Calculator itself
         Calculator calc;
         Wolfram wolf = new Wolfram();
@@ -96,6 +108,7 @@ namespace calculator
 
         private void Initialize()
         {
+            CheckInternetConnection();
             boxes = new List<List<TextBox>>();
             labels = new List<List<RichTextBox>>();
             toasts = new List<Toast>();
@@ -129,6 +142,30 @@ namespace calculator
             return ScanArray(true);
         }
 
+        static async void CheckInternetConnection()
+        {
+            connected = await CheckInternetConnectionAsync();
+        }
+
+        public static Task<bool> CheckInternetConnectionAsync()
+        {
+            return Task<bool>.Run(() => {
+                try
+                {
+                    using (var client = new WebClient())
+                    using (var stream = client.OpenRead("http://www.google.com"))
+                    {
+                        return true;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            });
+        }
+
+
         /// <summary>
         /// Переводит список списков TextBox в массив double[,]
         /// </summary>
@@ -154,6 +191,11 @@ namespace calculator
                         boxes[i][j].Text = "0"+ boxes[i][j].Text; 
                     if (boxes[i][j].Text.ToString().Last() == '.') // Если последний символ точка (123.)
                         boxes[i][j].Text += "0";
+                    if (boxes[i][j].Text.Contains("-")) // Если минус где попало
+                    {
+                        boxes[i][j].Text = boxes[i][j].Text.Replace("-", "");
+                        boxes[i][j].Text = "-"+ boxes[i][j].Text;
+                    }
                     if (boxes[i][j].Text.ToString().Length > 8) boxes[i][j].Text = boxes[i][j].Text.ToString().Remove(8);
                     array[i, j - jstart] = double.Parse(boxes[i][j].Text.Replace(".", ",")); // Double кушает только запятые
                 }
@@ -163,16 +205,26 @@ namespace calculator
         private string SystemToString()
         {
             string[] array = new string[boxes.Count];
+            string output = "Solve[{";
             for (int i = 0; i < boxes.Count; i++)
             {
+                if (i != 0) output += ",";
                 for (int j = 0; j < labels.Last().Count; j++)
                 {
                     array[i] += boxes[i][j].Text.Replace(".", ","); // Double кушает только запятые
                     array[i] += "*"+labels[i][j].Text;
                 }
                 array[i] += boxes[i].Last().Text.Replace(".",",");
+                output += array[0];
             }
-            return "Solve[{" + array[0]+","+ "" + array[1] + ","+ "" + array[2] + "},{X1,X2,X3}]";
+            output += "},{";
+            for (int i = 0; i < Labels.Last().Count; i++)
+            {
+                if (i != 0) output += ",";
+                output += "X" + (i+1).ToString();
+            }
+            output += "}]";
+            return output;
         }
 
         /// <summary>
@@ -181,17 +233,20 @@ namespace calculator
         /// <returns></returns>
         public List<string> Solve()
         {
-            double[] solution;
+            CheckInternetConnection();
+            double[] solution = new double[]{0,0,0};
             List<string> output = new List<string>();
             double[,] free = ScanArray(false);
             try
             {
-                calc = new Calculator(ScanArray(true));
-                calc[0] = free[0, 0];
-                calc[1] = free[1, 0];
-                calc[2] = free[2, 0];
-                solution = calc.Solve(); // Запрашиваем решение
-
+                if (boxes.Count == 3)
+                {
+                    calc = new Calculator(ScanArray(true));
+                    calc[0] = free[0, 0];
+                    calc[1] = free[1, 0];
+                    calc[2] = free[2, 0];
+                    solution = calc.Solve(); // Запрашиваем решение
+                }
                 if (solution[0] + solution[1] + solution[2] != 0)
                 {
                     foreach (double num in solution)
@@ -199,14 +254,16 @@ namespace calculator
                 }
                 else
                 {
-                    string input = ""+SystemToString();//[//math:${input1}//],[//math:${input2}//],[//math:${input3}//]
-                    MessageBox.Show(input, "Готово");
+                    string input = ""+SystemToString();
+                    MessageBox.Show(input, "");
                     List<string> text = wolf.SolveSystem(input);
-                    if (text[0] != "C1") ShowToast("Значение получено", "Готово");
-                    else ShowToast("Не удалось найти значение выражения", "Оказия");
-                    MessageBox.Show(text[0]+ text[1]+ text[2], "Готово");
-
-                    output = text;//new List<string> { "C1", "C2", "C3" };
+                    if (text[0] != "C1")
+                        output = text;
+                    else
+                        foreach (double num in solution)
+                            output.Add("0");
+                    ShowToast("Значение получено", "Готово");
+                    //ShowToast("Не удалось найти значение выражения", "Оказия");
                 }
             }
             catch (Exception e)
@@ -226,6 +283,7 @@ namespace calculator
         /// <param name="top">Form.Top</param>
         public void ShowToast(string text, string header, int left, int top)
         {
+            UpdateToasts();
             toasts.Add(new Toast(text, header));
             toasts.Last().Left = left + formWidth/2 - toasts.Last().Width / 2 + toastLeftMargin;
             toasts.Last().Top = top + formHeight - toastTopMargin;
@@ -234,10 +292,40 @@ namespace calculator
 
         public void ShowToast(string text, string info)
         {
-            toasts.Add(new Toast(text, info));
-            toasts.Last().Left = formLeft + formWidth / 2 - toasts.Last().Width / 2 + toastLeftMargin;
-            toasts.Last().Top = formTop + formHeight - toastTopMargin;
-            toasts.Last().Show();
+            
+            int top = formTop;
+            if (toasts.Count != 0)
+            {
+                top -= 55 * toasts.Count;
+            }
+
+            toasts.Add(
+                new Toast(text, info,
+                formLeft + formWidth / 2 + toastLeftMargin,
+                top + formHeight - toastTopMargin
+             )
+            );
+        }
+
+        public int UpdateToasts()
+        {
+            int count = 0;
+            int i = 0;
+            while (i < toasts.Count)
+            {
+                if (!toasts[i].Shown)
+                {
+                    toasts[i].Close();
+                    toasts.Remove(toasts[i]);
+                }
+                else
+                {
+                    toasts[i].Top = formTop + formHeight - toastTopMargin - 55*i;
+                    i++;
+                    count++;
+                }
+            }
+            return count;
         }
 
         /// <summary>
@@ -452,11 +540,19 @@ namespace calculator
             if (e.KeyChar != (char)Keys.Back)
             {
                 // Если введена не цифра, не точка, либо вторая точка
-                if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' || e.KeyChar == '.' && box.Text.Contains("."))
+                if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' & e.KeyChar != '-' || e.KeyChar == '.' && box.Text.Contains("."))
+                {
                     e.Handled = true;
-                // Воод не более 8 символов
-                if (box.Text.ToString().Length > 8) e.Handled = true;
+                }
+                else
+                if (e.KeyChar == '-')
+                {
+                    e.Handled = true;
+                    if(!box.Text.Contains("-")) box.Text = "-" + box.Text;
+                } 
             }
+            // Воод не более 8 символов
+            if (box.Text.ToString().Length > 8) e.Handled = true;
         }
 
         /// <summary>
