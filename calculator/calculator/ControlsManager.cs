@@ -75,6 +75,7 @@ namespace calculator
         private List<Toast> toasts = new List<Toast>();
         // Calculator itself
         Calculator calc;
+        Wolfram wolf = new Wolfram();
         // Constructors
         public ControlsManager(int width, int height)
         {
@@ -159,6 +160,21 @@ namespace calculator
             return array;
         }
 
+        private string SystemToString()
+        {
+            string[] array = new string[boxes.Count];
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                for (int j = 0; j < labels.Last().Count; j++)
+                {
+                    array[i] += boxes[i][j].Text.Replace(".", ","); // Double кушает только запятые
+                    array[i] += "*"+labels[i][j].Text;
+                }
+                array[i] += boxes[i].Last().Text.Replace(".",",");
+            }
+            return "Solve[{" + array[0]+","+ "" + array[1] + ","+ "" + array[2] + "},{X1,X2,X3}]";
+        }
+
         /// <summary>
         /// Решает систему и выводит результат
         /// </summary>
@@ -176,8 +192,22 @@ namespace calculator
                 calc[2] = free[2, 0];
                 solution = calc.Solve(); // Запрашиваем решение
 
-                foreach (double num in solution)
-                    output.Add(num.ToString());
+                if (solution[0] + solution[1] + solution[2] != 0)
+                {
+                    foreach (double num in solution)
+                        output.Add(num.ToString());
+                }
+                else
+                {
+                    string input = ""+SystemToString();//[//math:${input1}//],[//math:${input2}//],[//math:${input3}//]
+                    MessageBox.Show(input, "Готово");
+                    List<string> text = wolf.SolveSystem(input);
+                    if (text[0] != "C1") ShowToast("Значение получено", "Готово");
+                    else ShowToast("Не удалось найти значение выражения", "Оказия");
+                    MessageBox.Show(text[0]+ text[1]+ text[2], "Готово");
+
+                    output = text;//new List<string> { "C1", "C2", "C3" };
+                }
             }
             catch (Exception e)
             {
