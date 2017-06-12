@@ -106,9 +106,9 @@ namespace calculator
         {
             var inv = BaseMatrix.Copy(variableCoeffs).Inverse();
             var x = new double[EquationNumber];
-            x[0] = inv[0, 0] * freeCoeffs[0] + inv[1, 0] * freeCoeffs[1] + inv[2, 0] * freeCoeffs[2];
-            x[1] = inv[0, 1] * freeCoeffs[0] + inv[1, 1] * freeCoeffs[1] + inv[2, 1] * freeCoeffs[2];
-            x[2] = inv[0, 2] * freeCoeffs[0] + inv[1, 2] * freeCoeffs[1] + inv[2, 2] * freeCoeffs[2];
+            x[0] = inv[0, 0] * freeCoeffs[0] + inv[0, 1] * freeCoeffs[1] + inv[0, 2] * freeCoeffs[2];
+            x[1] = inv[1, 0] * freeCoeffs[0] + inv[1, 1] * freeCoeffs[1] + inv[1, 2] * freeCoeffs[2];
+            x[2] = inv[2, 0] * freeCoeffs[0] + inv[2, 1] * freeCoeffs[1] + inv[2, 2] * freeCoeffs[2];
 
             return x;
         }
