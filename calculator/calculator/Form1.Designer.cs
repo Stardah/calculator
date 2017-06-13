@@ -143,6 +143,7 @@
             this.out3.Location = new System.Drawing.Point(86, 149);
             this.out3.Multiline = false;
             this.out3.Name = "out3";
+            this.out3.ReadOnly = true;
             this.out3.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
             this.out3.Size = new System.Drawing.Size(145, 21);
             this.out3.TabIndex = 12;
@@ -184,6 +185,7 @@
             this.out2.Location = new System.Drawing.Point(86, 112);
             this.out2.Multiline = false;
             this.out2.Name = "out2";
+            this.out2.ReadOnly = true;
             this.out2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
             this.out2.Size = new System.Drawing.Size(145, 21);
             this.out2.TabIndex = 8;
@@ -225,6 +227,7 @@
             this.out1.Location = new System.Drawing.Point(86, 73);
             this.out1.Multiline = false;
             this.out1.Name = "out1";
+            this.out1.ReadOnly = true;
             this.out1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
             this.out1.Size = new System.Drawing.Size(145, 21);
             this.out1.TabIndex = 4;

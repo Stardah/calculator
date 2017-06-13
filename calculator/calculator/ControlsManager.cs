@@ -402,6 +402,10 @@ namespace calculator
             }
         }
 
+        /// <summary>
+        /// Отрисовывает системы из памяти
+        /// </summary>
+        /// <param name="panel"></param>
         public void PreviewExpand(ref Panel panel)
         {
             Label label;
@@ -421,7 +425,7 @@ namespace calculator
                 label.Top = (i * add.Length) * 30;
                 label.Left = 10;
                 j = 0;
-                label.Text = "    Система " + i.ToString()+":"+ Environment.NewLine;
+                label.Text = "    Система " + (i+1).ToString()+":"+ Environment.NewLine;
                 foreach (string s in add)
                 {
                     if (j == add.Length - 1)
