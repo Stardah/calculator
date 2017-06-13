@@ -30,8 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.panelSystem = new System.Windows.Forms.Panel();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.panelExpand = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnDel = new System.Windows.Forms.Button();
             this.btnAddRaw = new System.Windows.Forms.Button();
             this.btnSolve = new System.Windows.Forms.Button();
+            this.panelForLabelUp = new System.Windows.Forms.Panel();
+            this.btnExpand = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.out3 = new System.Windows.Forms.RichTextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -49,27 +57,91 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnConnected = new System.Windows.Forms.RadioButton();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnDel = new System.Windows.Forms.Button();
-            this.textWoldQuery = new System.Windows.Forms.TextBox();
-            this.btnWolf = new System.Windows.Forms.Button();
-            this.textWolfResult = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.panelSystem = new System.Windows.Forms.Panel();
-            this.panelExpand = new System.Windows.Forms.Panel();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnExpand = new System.Windows.Forms.Button();
-            this.timer = new System.Windows.Forms.Timer(this.components);
-            this.panelForLabelUp = new System.Windows.Forms.Panel();
+            this.labelSolution = new System.Windows.Forms.Label();
+            this.labelWhat = new System.Windows.Forms.Label();
+            this.btnWolf = new System.Windows.Forms.Button();
+            this.textWolfResult = new System.Windows.Forms.TextBox();
+            this.textWoldQuery = new System.Windows.Forms.TextBox();
+            this.panelSystem.SuspendLayout();
+            this.panelForLabelUp.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panelSystem.SuspendLayout();
-            this.panelForLabelUp.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panelSystem
+            // 
+            this.panelSystem.BackColor = System.Drawing.Color.Transparent;
+            this.panelSystem.BackgroundImage = global::calculator.Properties.Resources.LightTriangles;
+            this.panelSystem.Controls.Add(this.panelExpand);
+            this.panelSystem.Controls.Add(this.btnClear);
+            this.panelSystem.Controls.Add(this.btnDel);
+            this.panelSystem.Controls.Add(this.btnAddRaw);
+            this.panelSystem.Controls.Add(this.btnSolve);
+            this.panelSystem.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelSystem.Location = new System.Drawing.Point(0, 72);
+            this.panelSystem.Name = "panelSystem";
+            this.panelSystem.Size = new System.Drawing.Size(321, 193);
+            this.panelSystem.TabIndex = 11;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // panelExpand
+            // 
+            this.panelExpand.AutoScroll = true;
+            this.panelExpand.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panelExpand.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
+            this.panelExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelExpand.Location = new System.Drawing.Point(42, 0);
+            this.panelExpand.Name = "panelExpand";
+            this.panelExpand.Size = new System.Drawing.Size(262, 193);
+            this.panelExpand.TabIndex = 12;
+            this.panelExpand.Visible = false;
+            this.panelExpand.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelExpand_MouseClick);
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnClear.BackgroundImage = global::calculator.Properties.Resources.trashbin;
+            this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnClear.FlatAppearance.BorderSize = 0;
+            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnClear.ForeColor = System.Drawing.Color.Transparent;
+            this.btnClear.Location = new System.Drawing.Point(0, 23);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(32, 32);
+            this.btnClear.TabIndex = 11;
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnDel
+            // 
+            this.btnDel.BackColor = System.Drawing.Color.Transparent;
+            this.btnDel.BackgroundImage = global::calculator.Properties.Resources.BtnDel;
+            this.btnDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDel.FlatAppearance.BorderSize = 0;
+            this.btnDel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SkyBlue;
+            this.btnDel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
+            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDel.ForeColor = System.Drawing.Color.White;
+            this.btnDel.Location = new System.Drawing.Point(12, 107);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(32, 32);
+            this.btnDel.TabIndex = 6;
+            this.btnDel.UseVisualStyleBackColor = false;
+            this.btnDel.Visible = false;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // btnAddRaw
             // 
@@ -102,7 +174,7 @@
             this.btnSolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSolve.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSolve.ForeColor = System.Drawing.Color.White;
-            this.btnSolve.Location = new System.Drawing.Point(50, 152);
+            this.btnSolve.Location = new System.Drawing.Point(51, 150);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(218, 32);
             this.btnSolve.TabIndex = 2;
@@ -113,6 +185,54 @@
             this.btnSolve.MouseEnter += new System.EventHandler(this.btnMouseEnter);
             this.btnSolve.MouseLeave += new System.EventHandler(this.btnMouseLeave);
             this.btnSolve.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnMouseUp);
+            // 
+            // panelForLabelUp
+            // 
+            this.panelForLabelUp.BackColor = System.Drawing.Color.DarkViolet;
+            this.panelForLabelUp.BackgroundImage = global::calculator.Properties.Resources.Header2;
+            this.panelForLabelUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelForLabelUp.Controls.Add(this.btnExpand);
+            this.panelForLabelUp.Controls.Add(this.label7);
+            this.panelForLabelUp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelForLabelUp.Location = new System.Drawing.Point(0, 27);
+            this.panelForLabelUp.Name = "panelForLabelUp";
+            this.panelForLabelUp.Size = new System.Drawing.Size(321, 45);
+            this.panelForLabelUp.TabIndex = 13;
+            // 
+            // btnExpand
+            // 
+            this.btnExpand.BackColor = System.Drawing.Color.Transparent;
+            this.btnExpand.BackgroundImage = global::calculator.Properties.Resources.arrowGold;
+            this.btnExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExpand.FlatAppearance.BorderSize = 0;
+            this.btnExpand.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExpand.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExpand.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnExpand.ForeColor = System.Drawing.Color.White;
+            this.btnExpand.Location = new System.Drawing.Point(268, 7);
+            this.btnExpand.Name = "btnExpand";
+            this.btnExpand.Size = new System.Drawing.Size(32, 32);
+            this.btnExpand.TabIndex = 12;
+            this.btnExpand.UseVisualStyleBackColor = false;
+            this.btnExpand.Click += new System.EventHandler(this.btnExpand_Click);
+            this.btnExpand.MouseEnter += new System.EventHandler(this.btnExpand_MouseEnter);
+            this.btnExpand.MouseLeave += new System.EventHandler(this.btnExpand_MouseLeave);
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label7.Font = new System.Drawing.Font("Bell MT", 14.25F, System.Drawing.FontStyle.Bold);
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(321, 45);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Система уравнений";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
@@ -330,69 +450,13 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnDel
-            // 
-            this.btnDel.BackColor = System.Drawing.Color.Transparent;
-            this.btnDel.BackgroundImage = global::calculator.Properties.Resources.BtnDel;
-            this.btnDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDel.FlatAppearance.BorderSize = 0;
-            this.btnDel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SkyBlue;
-            this.btnDel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
-            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDel.ForeColor = System.Drawing.Color.White;
-            this.btnDel.Location = new System.Drawing.Point(12, 107);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(32, 32);
-            this.btnDel.TabIndex = 6;
-            this.btnDel.UseVisualStyleBackColor = false;
-            this.btnDel.Visible = false;
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
-            // 
-            // textWoldQuery
-            // 
-            this.textWoldQuery.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textWoldQuery.Location = new System.Drawing.Point(67, 30);
-            this.textWoldQuery.Name = "textWoldQuery";
-            this.textWoldQuery.Size = new System.Drawing.Size(201, 23);
-            this.textWoldQuery.TabIndex = 7;
-            // 
-            // btnWolf
-            // 
-            this.btnWolf.BackColor = System.Drawing.Color.Transparent;
-            this.btnWolf.BackgroundImage = global::calculator.Properties.Resources.RoundedButton2;
-            this.btnWolf.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnWolf.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btnWolf.FlatAppearance.BorderSize = 0;
-            this.btnWolf.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnWolf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnWolf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWolf.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnWolf.ForeColor = System.Drawing.Color.White;
-            this.btnWolf.Location = new System.Drawing.Point(211, 59);
-            this.btnWolf.Name = "btnWolf";
-            this.btnWolf.Size = new System.Drawing.Size(150, 24);
-            this.btnWolf.TabIndex = 7;
-            this.btnWolf.Text = "ВЫЧИСЛИТЬ";
-            this.btnWolf.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnWolf.UseVisualStyleBackColor = false;
-            this.btnWolf.Click += new System.EventHandler(this.btnWolf_Click);
-            // 
-            // textWolfResult
-            // 
-            this.textWolfResult.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textWolfResult.Location = new System.Drawing.Point(306, 30);
-            this.textWolfResult.Name = "textWolfResult";
-            this.textWolfResult.Size = new System.Drawing.Size(201, 23);
-            this.textWolfResult.TabIndex = 8;
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel3.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
             this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.labelSolution);
+            this.panel3.Controls.Add(this.labelWhat);
             this.panel3.Controls.Add(this.btnWolf);
             this.panel3.Controls.Add(this.textWolfResult);
             this.panel3.Controls.Add(this.textWoldQuery);
@@ -408,141 +472,78 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(274, 30);
+            this.label6.Location = new System.Drawing.Point(278, 30);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(26, 23);
             this.label6.TabIndex = 10;
             this.label6.Text = "=";
             // 
-            // label5
+            // labelSolution
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(434, 11);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 16);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "РЕШЕНИЕ";
+            this.labelSolution.AutoSize = true;
+            this.labelSolution.BackColor = System.Drawing.Color.Transparent;
+            this.labelSolution.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSolution.ForeColor = System.Drawing.Color.White;
+            this.labelSolution.Location = new System.Drawing.Point(380, 11);
+            this.labelSolution.Name = "labelSolution";
+            this.labelSolution.Size = new System.Drawing.Size(73, 16);
+            this.labelSolution.TabIndex = 9;
+            this.labelSolution.Text = "Решение";
             // 
-            // label1
+            // labelWhat
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(66, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 16);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "ВЫРАЖЕНИЕ";
+            this.labelWhat.AutoSize = true;
+            this.labelWhat.BackColor = System.Drawing.Color.Transparent;
+            this.labelWhat.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelWhat.ForeColor = System.Drawing.Color.White;
+            this.labelWhat.Location = new System.Drawing.Point(125, 11);
+            this.labelWhat.Name = "labelWhat";
+            this.labelWhat.Size = new System.Drawing.Size(95, 16);
+            this.labelWhat.TabIndex = 4;
+            this.labelWhat.Text = "Выражение";
             // 
-            // label7
+            // btnWolf
             // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label7.Font = new System.Drawing.Font("Bell MT", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(321, 45);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Система уравнений";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnWolf.BackColor = System.Drawing.Color.Transparent;
+            this.btnWolf.BackgroundImage = global::calculator.Properties.Resources.RoundedButton2;
+            this.btnWolf.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnWolf.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnWolf.FlatAppearance.BorderSize = 0;
+            this.btnWolf.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnWolf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnWolf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWolf.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnWolf.ForeColor = System.Drawing.Color.White;
+            this.btnWolf.Location = new System.Drawing.Point(215, 59);
+            this.btnWolf.Name = "btnWolf";
+            this.btnWolf.Size = new System.Drawing.Size(150, 24);
+            this.btnWolf.TabIndex = 7;
+            this.btnWolf.Text = "Wolfram";
+            this.btnWolf.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnWolf.UseVisualStyleBackColor = false;
+            this.btnWolf.Click += new System.EventHandler(this.btnWolf_Click);
             // 
-            // panelSystem
+            // textWolfResult
             // 
-            this.panelSystem.BackColor = System.Drawing.Color.Transparent;
-            this.panelSystem.Controls.Add(this.panelExpand);
-            this.panelSystem.Controls.Add(this.btnClear);
-            this.panelSystem.Controls.Add(this.btnDel);
-            this.panelSystem.Controls.Add(this.btnAddRaw);
-            this.panelSystem.Controls.Add(this.btnSolve);
-            this.panelSystem.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelSystem.Location = new System.Drawing.Point(0, 72);
-            this.panelSystem.Name = "panelSystem";
-            this.panelSystem.Size = new System.Drawing.Size(321, 193);
-            this.panelSystem.TabIndex = 11;
+            this.textWolfResult.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textWolfResult.Location = new System.Drawing.Point(310, 30);
+            this.textWolfResult.Name = "textWolfResult";
+            this.textWolfResult.Size = new System.Drawing.Size(201, 23);
+            this.textWolfResult.TabIndex = 8;
             // 
-            // panelExpand
+            // textWoldQuery
             // 
-            this.panelExpand.AutoScroll = true;
-            this.panelExpand.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panelExpand.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
-            this.panelExpand.Location = new System.Drawing.Point(42, 0);
-            this.panelExpand.Name = "panelExpand";
-            this.panelExpand.Size = new System.Drawing.Size(262, 193);
-            this.panelExpand.TabIndex = 12;
-            this.panelExpand.Visible = false;
-            this.panelExpand.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelExpand_MouseClick);
-            // 
-            // btnClear
-            // 
-            this.btnClear.BackColor = System.Drawing.Color.Transparent;
-            this.btnClear.BackgroundImage = global::calculator.Properties.Resources.trashbin;
-            this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnClear.FlatAppearance.BorderSize = 0;
-            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClear.ForeColor = System.Drawing.Color.Transparent;
-            this.btnClear.Location = new System.Drawing.Point(0, 29);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(32, 32);
-            this.btnClear.TabIndex = 11;
-            this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btnExpand
-            // 
-            this.btnExpand.BackColor = System.Drawing.Color.Transparent;
-            this.btnExpand.BackgroundImage = global::calculator.Properties.Resources.arrowGold;
-            this.btnExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnExpand.FlatAppearance.BorderSize = 0;
-            this.btnExpand.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnExpand.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExpand.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnExpand.ForeColor = System.Drawing.Color.White;
-            this.btnExpand.Location = new System.Drawing.Point(268, 7);
-            this.btnExpand.Name = "btnExpand";
-            this.btnExpand.Size = new System.Drawing.Size(32, 32);
-            this.btnExpand.TabIndex = 12;
-            this.btnExpand.UseVisualStyleBackColor = false;
-            this.btnExpand.Click += new System.EventHandler(this.btnExpand_Click);
-            this.btnExpand.MouseEnter += new System.EventHandler(this.btnExpand_MouseEnter);
-            this.btnExpand.MouseLeave += new System.EventHandler(this.btnExpand_MouseLeave);
-            // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 500;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // panelForLabelUp
-            // 
-            this.panelForLabelUp.BackColor = System.Drawing.Color.DarkViolet;
-            this.panelForLabelUp.BackgroundImage = global::calculator.Properties.Resources.Header2;
-            this.panelForLabelUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panelForLabelUp.Controls.Add(this.btnExpand);
-            this.panelForLabelUp.Controls.Add(this.label7);
-            this.panelForLabelUp.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelForLabelUp.Location = new System.Drawing.Point(0, 27);
-            this.panelForLabelUp.Name = "panelForLabelUp";
-            this.panelForLabelUp.Size = new System.Drawing.Size(321, 45);
-            this.panelForLabelUp.TabIndex = 13;
+            this.textWoldQuery.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textWoldQuery.Location = new System.Drawing.Point(71, 30);
+            this.textWoldQuery.Name = "textWoldQuery";
+            this.textWoldQuery.Size = new System.Drawing.Size(201, 23);
+            this.textWoldQuery.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::calculator.Properties.Resources.LightTriangles;
             this.ClientSize = new System.Drawing.Size(586, 360);
             this.Controls.Add(this.panelSystem);
             this.Controls.Add(this.panelForLabelUp);
@@ -554,14 +555,14 @@
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "Form1";
             this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.panelSystem.ResumeLayout(false);
+            this.panelForLabelUp.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panelSystem.ResumeLayout(false);
-            this.panelForLabelUp.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -578,9 +579,9 @@
         private System.Windows.Forms.Button btnWolf;
         private System.Windows.Forms.TextBox textWolfResult;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelWhat;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelSolution;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panelSystem;
         private System.Windows.Forms.Button btnClear;

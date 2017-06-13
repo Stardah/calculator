@@ -74,7 +74,11 @@ namespace calculator
             File.WriteAllBytes(fileName, Resources.Exo2);   // Записываем ttf из ресурсов в файл
             fonts.AddFontFile(fileName);                    // Загружаем в коллекцию шрифтов
             labelHeader.Font = new Font(fonts.Families[0], 16f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSolve.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSolve.Font = new Font(fonts.Families[0], 14f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnWolf.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelWhat.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelSolution.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnConnected.Font = new Font(fonts.Families[0], 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
         }
 
         public void InitControls()
@@ -271,8 +275,9 @@ namespace calculator
         private void btnWolf_Click(object sender, EventArgs e)
         {
             textWolfResult.Text = wolf.SolveThis(textWoldQuery.Text);
-            if (textWolfResult.Text != "") stuff.ShowToast("Значение получено", "Готово");
-            else stuff.ShowToast("Не удалось найти значение выражения", "Оказия");
+            if (textWolfResult.Text != "") stuff.ShowToast("Значение получено", "Wolfram");
+            else stuff.ShowToast("Не удалось найти значение выражения", "Wolfram");
+            ShowInternetStatus();
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -318,7 +323,6 @@ namespace calculator
         {
             panelExpand.Visible = !panelExpand.Visible;
             stuff.PreviewExpand(ref panelExpand);
-            //MessageBox.Show(stuff.labelsPrev.Last().Text,"");
         }
 
         private void panelExpand_MouseClick(object sender, MouseEventArgs e)

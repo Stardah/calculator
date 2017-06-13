@@ -63,16 +63,6 @@ namespace calculator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap arrowDown {
-            get {
-                object obj = ResourceManager.GetObject("arrowDown", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap arrowGold {
             get {
                 object obj = ResourceManager.GetObject("arrowGold", resourceCulture);
@@ -103,16 +93,6 @@ namespace calculator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CloseIcon {
-            get {
-                object obj = ResourceManager.GetObject("CloseIcon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap closeSQR {
             get {
                 object obj = ResourceManager.GetObject("closeSQR", resourceCulture);
@@ -127,16 +107,6 @@ namespace calculator.Properties {
             get {
                 object obj = ResourceManager.GetObject("Exo2", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap figure {
-            get {
-                object obj = ResourceManager.GetObject("figure", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -236,6 +206,16 @@ namespace calculator.Properties {
         internal static System.Drawing.Bitmap trashbin {
             get {
                 object obj = ResourceManager.GetObject("trashbin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wolfram {
+            get {
+                object obj = ResourceManager.GetObject("wolfram", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
