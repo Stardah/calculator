@@ -73,6 +73,26 @@ namespace calculator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrowGold {
+            get {
+                object obj = ResourceManager.GetObject("arrowGold", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrowWhite {
+            get {
+                object obj = ResourceManager.GetObject("arrowWhite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap BtnDel {
             get {
                 object obj = ResourceManager.GetObject("BtnDel", resourceCulture);
@@ -126,6 +146,16 @@ namespace calculator.Properties {
         internal static System.Drawing.Bitmap Header {
             get {
                 object obj = ResourceManager.GetObject("Header", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Header2 {
+            get {
+                object obj = ResourceManager.GetObject("Header2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

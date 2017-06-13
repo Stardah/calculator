@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -409,36 +410,47 @@ namespace calculator
         public void PreviewExpand(ref Panel panel)
         {
             Label label;
+            GroupBox box;
             string[] add;
             panelExpand = panel;
             int j;
-            for (int i = 0; i < calc.MemoryCount; i++) 
+            for (int i = labelsPrev.Count; i < calc.MemoryCount; i++) 
             {
+                add = calc.GetSystemStringsFromMemory(i);
+
+                box = new GroupBox();
+                box.AutoSize = true;
+                box.Text = "Система " + (i + 1).ToString();
+                box.BackColor = Color.DarkSlateBlue;
+                box.ForeColor = Color.FromArgb(255,204,34);
+                box.Font = new Font(labelFont.Name, 12f, FontStyle.Regular);
+                box.Dock = DockStyle.Top;
                 label = new Label();
+                label.Left = 10;
                 label.Font = new Font(labelFont.Name, 12f, FontStyle.Regular);
                 label.ForeColor = Color.White;
                 label.AutoSize = true;
                 label.BorderStyle = BorderStyle.None;
                 label.BackColor = Color.Transparent;
-                label.Click += LabelExpandClick;          
-                add = calc.GetSystemStringsFromMemory(i);
-                label.Top = (i * add.Length) * 30;
-                label.Left = 10;
+                label.Click += LabelExpandClick;
+                label.Dock = DockStyle.Bottom;
                 j = 0;
-                label.Text = "    Система " + (i+1).ToString()+":"+ Environment.NewLine;
+                label.Text ="";
                 foreach (string s in add)
                 {
                     if (j == add.Length - 1)
                     {
                         string ss = s.Replace("x2", Environment.NewLine + "x2");
-                        label.Text += ss.Replace("x3", Environment.NewLine + "x3") + Environment.NewLine;
+                        label.Text += ss.Replace("x3", Environment.NewLine + "x3");
+                        if (j != 4) label.Text += Environment.NewLine;
                     }
                     else
                         label.Text += s + " = 0" + Environment.NewLine;
                     j++;
                 }
                 labelsPrev.Add(label);
-                panel.Controls.Add(labelsPrev.Last());
+                box.Controls.Add(labelsPrev.Last());
+                panel.Controls.Add(box);
             }
         }
 

@@ -265,13 +265,12 @@
             // 
             // labelHeader
             // 
-            this.labelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.labelHeader.BackColor = System.Drawing.Color.White;
             this.labelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelHeader.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelHeader.Font = new System.Drawing.Font("Bell MT", 14.25F, System.Drawing.FontStyle.Bold);
             this.labelHeader.ForeColor = System.Drawing.Color.White;
-            this.labelHeader.Image = global::calculator.Properties.Resources.LabelBack;
-            this.labelHeader.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.labelHeader.Image = global::calculator.Properties.Resources.Header2;
             this.labelHeader.Location = new System.Drawing.Point(0, 0);
             this.labelHeader.Name = "labelHeader";
             this.labelHeader.Size = new System.Drawing.Size(265, 45);
@@ -471,9 +470,9 @@
             // panelExpand
             // 
             this.panelExpand.AutoScroll = true;
-            this.panelExpand.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panelExpand.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.panelExpand.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
-            this.panelExpand.Location = new System.Drawing.Point(38, 0);
+            this.panelExpand.Location = new System.Drawing.Point(42, 0);
             this.panelExpand.Name = "panelExpand";
             this.panelExpand.Size = new System.Drawing.Size(262, 193);
             this.panelExpand.TabIndex = 12;
@@ -502,11 +501,11 @@
             // btnExpand
             // 
             this.btnExpand.BackColor = System.Drawing.Color.Transparent;
-            this.btnExpand.BackgroundImage = global::calculator.Properties.Resources.arrowDown;
+            this.btnExpand.BackgroundImage = global::calculator.Properties.Resources.arrowGold;
             this.btnExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnExpand.FlatAppearance.BorderSize = 0;
-            this.btnExpand.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SkyBlue;
-            this.btnExpand.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
+            this.btnExpand.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExpand.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExpand.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnExpand.ForeColor = System.Drawing.Color.White;
@@ -516,6 +515,8 @@
             this.btnExpand.TabIndex = 12;
             this.btnExpand.UseVisualStyleBackColor = false;
             this.btnExpand.Click += new System.EventHandler(this.btnExpand_Click);
+            this.btnExpand.MouseEnter += new System.EventHandler(this.btnExpand_MouseEnter);
+            this.btnExpand.MouseLeave += new System.EventHandler(this.btnExpand_MouseLeave);
             // 
             // timer
             // 
@@ -525,8 +526,8 @@
             // 
             // panelForLabelUp
             // 
-            this.panelForLabelUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.panelForLabelUp.BackgroundImage = global::calculator.Properties.Resources.LabelBack;
+            this.panelForLabelUp.BackColor = System.Drawing.Color.DarkViolet;
+            this.panelForLabelUp.BackgroundImage = global::calculator.Properties.Resources.Header2;
             this.panelForLabelUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelForLabelUp.Controls.Add(this.btnExpand);
             this.panelForLabelUp.Controls.Add(this.label7);

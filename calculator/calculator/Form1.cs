@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -90,7 +91,6 @@ namespace calculator
             panel3.MouseDown += panelMouseDown;
             panelSystem.MouseMove += panelMouseMove;
             panelSystem.MouseDown += panelMouseDown;
-
             ShowInternetStatus();
         }
 
@@ -325,6 +325,18 @@ namespace calculator
         {
             Panel panel = sender as Panel;
             panel.Visible = false;
+        }
+
+        private void btnExpand_MouseEnter(object sender, EventArgs e)
+        {
+            Button btnExpand = sender as Button;
+            btnExpand.BackgroundImage = Resources.arrowWhite;
+        }
+
+        private void btnExpand_MouseLeave(object sender, EventArgs e)
+        {
+            Button btnExpand = sender as Button;
+            btnExpand.BackgroundImage = Resources.arrowGold;
         }
     }
 }
