@@ -486,9 +486,9 @@
             this.labelSolution.ForeColor = System.Drawing.Color.White;
             this.labelSolution.Location = new System.Drawing.Point(380, 11);
             this.labelSolution.Name = "labelSolution";
-            this.labelSolution.Size = new System.Drawing.Size(73, 16);
+            this.labelSolution.Size = new System.Drawing.Size(53, 16);
             this.labelSolution.TabIndex = 9;
-            this.labelSolution.Text = "Решение";
+            this.labelSolution.Text = "Ответ";
             // 
             // labelWhat
             // 

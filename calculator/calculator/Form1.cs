@@ -76,8 +76,8 @@ namespace calculator
             labelHeader.Font = new Font(fonts.Families[0], 16f, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSolve.Font = new Font(fonts.Families[0], 14f, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnWolf.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelWhat.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelSolution.Font = new Font(fonts.Families[0], 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelWhat.Font = new Font(fonts.Families[0], 11f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelSolution.Font = new Font(fonts.Families[0], 11f, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnConnected.Font = new Font(fonts.Families[0], 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
         }
 
