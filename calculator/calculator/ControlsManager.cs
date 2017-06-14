@@ -433,9 +433,9 @@ namespace calculator
                 label.BorderStyle = BorderStyle.None;
                 label.BackColor = Color.Transparent;
                 label.Click += LabelExpandClick;
-                label.Dock = DockStyle.Bottom;
+                //label.Dock = DockStyle.Bottom;
                 j = 0;
-                label.Text ="";
+                label.Text = Environment.NewLine+"";
                 foreach (string s in add)
                 {
                     if (j == add.Length - 1)

@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panelSystem = new System.Windows.Forms.Panel();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.panelExpand = new System.Windows.Forms.Panel();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
             this.btnAddRaw = new System.Windows.Forms.Button();
             this.btnSolve = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.panelForLabelUp = new System.Windows.Forms.Panel();
             this.btnExpand = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -85,12 +85,6 @@
             this.panelSystem.Name = "panelSystem";
             this.panelSystem.Size = new System.Drawing.Size(321, 193);
             this.panelSystem.TabIndex = 11;
-            // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 500;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // panelExpand
             // 
@@ -185,6 +179,12 @@
             this.btnSolve.MouseEnter += new System.EventHandler(this.btnMouseEnter);
             this.btnSolve.MouseLeave += new System.EventHandler(this.btnMouseLeave);
             this.btnSolve.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnMouseUp);
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // panelForLabelUp
             // 
